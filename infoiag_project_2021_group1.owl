@@ -6,7 +6,7 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.semanticweb.org/omcan/ontologies/2021/8/infoiag_project_2021_group1">
-    <Prefix name="" IRI="http://www.semanticweb.org/omcan/ontologies/2021/8/untitled-ontology-10#"/>
+    <Prefix name="" IRI="http://www.semanticweb.org/omcan/ontologies/2021/8/infoiag_project_2021_group1"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
@@ -381,6 +381,11 @@
         <Class IRI="#Transport"/>
         <NamedIndividual IRI="#train"/>
     </ClassAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#cost"/>
+        <NamedIndividual IRI="#bike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10</Literal>
+    </DataPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasCuisine"/>
         <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>

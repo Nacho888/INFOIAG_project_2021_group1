@@ -53,9 +53,13 @@ class Agent:
     def get_entity_values(self, entity):
         candidate = self.get_levenshtein_distance(entity, self.label_to_ent.keys())
         if candidate is not None:
-            return self.label_to_ent[candidate].get_properties()
+            result = {}
+            for property in self.label_to_ent[candidate].get_properties():
+                for value in property[self.ontology[candidate]]:
+                    result[self.prop_to_label[property]] = value
+            return result
         print(f"No entity named {entity} found")
-        return []
+        return {}
 
 
     def get_utility(self, transport, food):
@@ -64,12 +68,21 @@ class Agent:
 
     def get_transport_utility(self, transport):
         properties = self.get_entity_values(transport)
-        return 0.6 * properties["co2Footprint"] + 0.3 * properties["cost"] + 0.1 * properties["duration"]
-
+        try:
+            result = 0.6 * properties["co2Footprint"] + 0.3 * properties["cost"] + 0.1 * properties["duration"]
+            return result
+        except KeyError:
+            print("Error when processing the transport utility")
+            return 0
 
     def get_food_utility(self, food):
-        properties = self.get_entity_values(food)
-        return properties["co2Footprint"]
+        try:
+            properties = self.get_entity_values(food)
+            result = properties["co2Footprint"]
+            return result
+        except KeyError:
+            print("Error when processing the food utility")
+            return 0
 
 
 agent = Agent()
