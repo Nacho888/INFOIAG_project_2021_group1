@@ -58,6 +58,20 @@ class Agent:
         return []
 
 
+    def get_utility(self, transport, food):
+        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(food)
+
+
+    def get_transport_utility(self, transport):
+        properties = self.get_entity_values(transport)
+        return 0.6 * properties["co2Footprint"] + 0.3 * properties["cost"] + 0.1 * properties["duration"]
+
+
+    def get_food_utility(self, food):
+        properties = self.get_entity_values(food)
+        return properties["co2Footprint"]
+
+
 agent = Agent()
 
 # itself (we can remove this behavior) and all the subclass (I don't know why Car shows up here, maybe because of our
