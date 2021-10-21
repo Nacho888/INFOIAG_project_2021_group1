@@ -75,13 +75,24 @@ class Agent:
             print("Error when processing the transport utility")
             return 0
 
-    def get_food_utility(self, food):
+    def get_food_utility(self, food, location):
         try:
-            properties = self.get_entity_values(food)
-            result = properties["co2Footprint"]
+            result = self.check_food_co2_discount(food, location)
             return result
         except KeyError:
             print("Error when processing the food utility")
+            return 0
+
+
+    def check_food_co2_discount(self, food, location):
+        properties_food = self.get_entity_values(food)
+        location = self.ent_to_label[location]
+        try:
+            result = properties_food["co2Footprint"]
+            if properties_food["producedIn"] == location:
+                result = result * 0.25
+        except KeyError:
+            print("Error when processing the food CO2 discount")
             return 0
 
 
@@ -89,7 +100,9 @@ agent = Agent()
 
 # itself (we can remove this behavior) and all the subclass (I don't know why Car shows up here, maybe because of our
 # current implementation of the Transport relationship that we should reduce to electricCar and gasolineCar and get rid of Car)
-print(agent.get_subclasses("Preferences"))
+# print(agent.get_subclasses("Preferences"))
 
 # for now is just an empty set because we haven't set the property values (CO2 consumption, cost and duration)
-print(agent.get_entity_values("bike"))
+# print(agent.get_entity_values("bike"))
+
+print(agent.data_dict)
