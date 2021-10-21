@@ -75,9 +75,12 @@ class Agent:
             print("Error when processing the transport utility")
             return 0
 
-    def get_food_utility(self, food, location):
+    def get_food_utility(self, meal, location):
         try:
-            result = self.check_food_co2_discount(food, location)
+            result = 0
+            meal = self.get_entity_values(meal)
+            for food in meal["foods"]:
+                result += self.check_food_co2_discount(food, location)
             return result
         except KeyError:
             print("Error when processing the food utility")
@@ -94,6 +97,16 @@ class Agent:
         except KeyError:
             print("Error when processing the food CO2 discount")
             return 0
+
+
+    def generate_output(self, options):
+        result = {}
+        for i, option in enumerate(options, start=1):
+            result[f"option{i}"] = {"transport": option["transport"], "restaurant": option["restaurant"],
+            "meal": option["meal"], "co2": option["co2"], "utility": option["utility"]}
+        sorted_tuples = sorted(result.items(), key=lambda x: x["utility"])
+        sorted_result = {k: v for k, v in sorted_tuples}
+        json.dumps(sorted_result, indent=4)
 
 
 agent = Agent()
