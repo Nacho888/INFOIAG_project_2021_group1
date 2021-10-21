@@ -6,7 +6,7 @@ sg.theme('DarkTeal9')
 
 EXCEL_FILE = 'scenarios.xlsx'
 df = pd.read_excel(EXCEL_FILE)
-
+'''
 layout = [
     [sg.Text('Please fill out the following fields:')],
     [sg.Text('Name', size=(15,1)), sg.InputText(key='Name')],
@@ -19,8 +19,34 @@ layout = [
     [sg.Text('No. of Children', size=(15,1)), sg.Spin([i for i in range(0,16)],
                                                        initial_value=0, key='Children')],
     [sg.Submit(), sg.Button('Clear'), sg.Exit()]
-]
+]'''
 
+layout = [
+    [sg.Text('Preffered cuisine or food choices', size=(30, 1)), sg.InputText(key='Enter preffered cuisines or foods')],
+    [sg.Text('Cuisine or food choices to avoid', size=(30, 1)), sg.InputText(key='Enter cuisines or foods to avoid')],
+
+
+    [sg.Text('Select a restaurant price range', size=(30, 1)), sg.Combo(['Cheap', 'Moderate', 'Expensive'], key='Restaurant price range')],
+    # either the above or we make them enter their savings /salary as input text and then we determine whether we find them cheap moderate or expensive restaurants,
+    # but they might want cheap restaurants even if they earn little or vice versa
+
+    [sg.Text('Do you want to eat out', size=(30, 1)), sg.Radio('Yes', "RADIO1", default=True),sg.Radio('No', "RADIO1")],
+    # seems unnecesary, doesnt everyone?
+
+    [sg.Text('Select the city you live in', size=(30, 1)), sg.Combo(['City 1', 'City 2', 'City 3', 'City 4', 'City 5', 'City 6', 'City 7'], key='')],
+    [sg.Text('Select the neighbourhood you live in', size=(30, 1)), sg.Combo(['Neighbourhood from selected city 1', 'Neighbourhood from selected city 2', 'Neighbourhood from selected city 3'], key='')],
+    # TODO: need to add logic so that based on the selected city we find neighbourhoods inside it and present those as options
+
+    [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)'),sg.Checkbox('Car (electric)'), sg.Checkbox('Ride-share'), sg.Checkbox('Train'), sg.Checkbox('Bike')],
+    # preffered transportation, TODO: if neighbourhood doesnt include train station, train should be disabled
+
+    [sg.Text('Select any health conditions you might have', size=(30, 1)), sg.Checkbox('COVID symptoms'),sg.Checkbox('Gluten allergy'), sg.Checkbox('Lactose intolerance')],
+
+    [sg.Text('Select any additional prefferences', size=(30, 1)),sg.Radio('None', "RADIO2", default=True),sg.Radio('Low Co2 food', "RADIO2"),sg.Radio('Low Co2 transport', "RADIO2")],
+    [sg.Text('Select any additional prefferences', size=(30, 1)), sg.Radio('None', "RADIO3", default=True),sg.Radio('Fast transport', "RADIO3"), sg.Radio('Cheap transport', "RADIO3")],
+
+    [sg.Submit(), sg.Button('Clear'), sg.Exit()]
+]
 window = sg.Window('Simple data entry form', layout)
 
 def clear_input():
