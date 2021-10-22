@@ -131,19 +131,44 @@ class Agent:
         return result
 
 
-    def get_restaurants(self, eatOut, preferredCuisine, avoidCuisines, healthConditions):
+    def get_restaurants(self, preferredCuisine, avoidCuisines, healthConditions):
         result = []
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
 
         # TODO: check properties access and apply filters
+        preferred_restaurants = []
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
-            option = {f"{properties['name']}": {"cuisine": properties["hasCuisine"], "neighbourhood": properties["establishedIn"], "meals": properties["hasCuisine"]["servesMeals"]}}
-            result.append(option)
+            cuisine = properties["hasCuisine"]
+            if cuisine == preferredCuisine:
+                preferred_restaurants.append(cuisine)
+
+        if len(preferred_restaurants > 0):
+            restaurants = preferred_restaurants
+
+        for restaurant in restaurants:
+            if self.apply_restaurant_filters(restaurant, avoidCuisines, healthConditions):
+                option = {f"{properties['name']}": {"cuisine": properties["hasCuisine"], "neighbourhood": properties["establishedIn"], "meals": properties["hasCuisine"]["servesMeals"]}}
+                result.append(option)
 
         return result
 
+
+    def apply_restaurant_filters(self, restaurant, avoidCuisines, healthConditions):
+        check = True
+
+        if restaurant["hasCuisine"] == avoidCuisines:
+            check = False
+
+        meals = restaurant["hasCuisine"]["servesMeals"]
+        for meal in meals:
+            meal_properties = self.get_entity_values(meal)
+            for food in meal_properties["hasFood"]:
+                if food in healthConditions:
+                    check = False
+
+        return check
 
     def get_restaurants_location(self, restaurants):
         result = []
@@ -153,11 +178,11 @@ class Agent:
         # TODO: check properties access and comparison of names
         for restaurant in restaurants:
             key = restaurant.keys()[0]
-            rest_neigbourhood = restaurant[key]["neighbourhood"]
+            restaurant_neigbourhood = restaurant[key]["neighbourhood"]
             for neighbourhood in neighbourhoods:
-                if rest_neigbourhood == neighbourhood:
+                if restaurant_neigbourhood == neighbourhood:
                     properties_neighbourhood = self.get_entity_values(neighbourhood)
-                    option = {f"{key}": {"neighbourhood": rest_neigbourhood, "city": properties_neighbourhood["belongsToCity"], "location": properties_neighbourhood["belongsToCity"]["locatedAt"]}}
+                    option = {f"{key}": {"neighbourhood": restaurant_neigbourhood, "city": properties_neighbourhood["belongsToCity"], "location": properties_neighbourhood["belongsToCity"]["locatedAt"]}}
                     result.append(option)
 
         return result
@@ -170,7 +195,7 @@ class Agent:
 
         options = []
 
-        restaurants = self.get_restaurants(df["EatOut"], df["PreferredCuisine"], df["AvoidCuisine"], df["HealtConditions"])
+        restaurants = self.get_restaurants(df["PreferredCuisine"], df["AvoidCuisine"], df["HealthConditions"])
         locations = self.get_restaurants_location(restaurants)
         transports = self.get_transports(locations, df["Additional1"], df["Additional2"], df["Transport"], df["HealthConditions"], df["Neighbourhood"])
 
@@ -200,4 +225,4 @@ agent = Agent()
 # for now is just an empty set because we haven't set the property values (CO2 consumption, cost and duration)
 # print(agent.get_entity_values("bike"))
 
-print(agent.data_dict)
+# print(agent.data_dict)
