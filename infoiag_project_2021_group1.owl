@@ -82,9 +82,6 @@
         <ObjectProperty IRI="#belongsToCity"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#establishedIn"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#hasCuisine"/>
     </Declaration>
     <Declaration>
@@ -476,15 +473,15 @@
         <NamedIndividual IRI="#amsterdam"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#amsterdamCentre"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#amsterdamNoord"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#amsterdamZuid"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -544,11 +541,11 @@
         <NamedIndividual IRI="#curryTofu"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#deKoog"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#deWaal"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -604,7 +601,7 @@
         <NamedIndividual IRI="#innsbruck"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -632,7 +629,7 @@
         <NamedIndividual IRI="#lactose"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#lombok"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -688,7 +685,7 @@
         <NamedIndividual IRI="#ramen"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#reichenau"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -704,11 +701,11 @@
         <NamedIndividual IRI="#rideShare"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#saggen"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#sciencePark"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -780,7 +777,7 @@
         <NamedIndividual IRI="#yogurt"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
         <NamedIndividual IRI="#zuilen"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
@@ -1449,10 +1446,6 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">40</Literal>
     </DataPropertyAssertion>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="#establishedIn"/>
-        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasCuisine"/>
         <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
     </SubObjectPropertyOf>
@@ -1522,10 +1515,6 @@
         <Class IRI="#Neighbourhood"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#establishedIn"/>
-        <Class IRI="#Restaurant"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasCuisine"/>
         <Class IRI="#Restaurant"/>
     </ObjectPropertyDomain>
@@ -1539,7 +1528,7 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasRestaurant"/>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasTransport"/>
@@ -1571,15 +1560,11 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#administrativeZoneOf"/>
-        <Class IRI="#Neighborhood"/>
+        <Class IRI="#Neighbourhood"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#belongsToCity"/>
         <Class IRI="#City"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#establishedIn"/>
-        <Class IRI="#Neighbourhood"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasCuisine"/>
