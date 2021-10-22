@@ -1,6 +1,7 @@
 from owlready2 import *
 import os
 import json
+import pandas as pd
 from Levenshtein import distance
 
 class Agent:
@@ -62,8 +63,8 @@ class Agent:
         return {}
 
 
-    def get_utility(self, transport, food):
-        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(food)
+    def get_utility(self, transport, meal, location):
+        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(meal, location)
 
 
     def get_transport_utility(self, transport):
@@ -74,6 +75,7 @@ class Agent:
         except KeyError:
             print("Error when processing the transport utility")
             return 0
+
 
     def get_food_utility(self, meal, location):
         try:
@@ -107,6 +109,86 @@ class Agent:
         sorted_tuples = sorted(result.items(), key=lambda x: x["utility"])
         sorted_result = {k: v for k, v in sorted_tuples}
         json.dumps(sorted_result, indent=4)
+
+
+    def calculate_co2(self, transport, meal, location):
+        total_co2 = 0
+        properties_transport = self.get_entity_values(transport)
+        try:
+            total_co2 += properties_transport["co2Footprint"]
+            total_co2 += self.get_food_utility(meal, location)
+            return total_co2
+        except KeyError:
+            print("Error when processing the total CO2 consumption")
+            return 0
+
+
+    def get_transports(self, locations, preferencesCO2, preferencesPrice, availableTransports, healthConditions, neighbourhood):
+        result = []
+
+        # TODO: extract the transports for the given locations taking into account where the user lives and his/her preferences
+
+        return result
+
+
+    def get_restaurants(self, eatOut, preferredCuisine, avoidCuisines, healthConditions):
+        result = []
+
+        restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
+
+        # TODO: check properties access and apply filters
+        for restaurant in restaurants:
+            properties = self.get_entity_values(restaurant)
+            option = {f"{properties['name']}": {"cuisine": properties["hasCuisine"], "neighbourhood": properties["establishedIn"], "meals": properties["hasCuisine"]["servesMeals"]}}
+            result.append(option)
+
+        return result
+
+
+    def get_restaurants_location(self, restaurants):
+        result = []
+
+        neighbourhoods = self.ontology.search(type = self.label_to_class["Neighbourhood"])
+
+        # TODO: check properties access and comparison of names
+        for restaurant in restaurants:
+            key = restaurant.keys()[0]
+            rest_neigbourhood = restaurant[key]["neighbourhood"]
+            for neighbourhood in neighbourhoods:
+                if rest_neigbourhood == neighbourhood:
+                    properties_neighbourhood = self.get_entity_values(neighbourhood)
+                    option = {f"{key}": {"neighbourhood": rest_neigbourhood, "city": properties_neighbourhood["belongsToCity"], "location": properties_neighbourhood["belongsToCity"]["locatedAt"]}}
+                    result.append(option)
+
+        return result
+
+
+    def reasoning(self, scenario_number):
+        df = pd.load("scenarios.xlsx")
+
+        df = df.iloc[scenario_number]
+
+        options = []
+
+        restaurants = self.get_restaurants(df["EatOut"], df["PreferredCuisine"], df["AvoidCuisine"], df["HealtConditions"])
+        locations = self.get_restaurants_location(restaurants)
+        transports = self.get_transports(locations, df["Additional1"], df["Additional2"], df["Transport"], df["HealthConditions"], df["Neighbourhood"])
+
+        # TODO: iterate in some way and assign all the values to the possible combinations (options) -> how to combine restaurants (their locations)
+        # with the transport
+
+        # for restaurant, meals in restaurants.items():
+        #     for meal in meals:
+        #         co2 = self.calculate_co2(transport, meal, location)
+        #         utility = self.get_utility(transport, meal, location)
+
+        #         option = {"transport": transport, "restaurant": restaurant,
+        #             "meal": meal, "co2": co2, "utility": utility}
+
+        #         options.append(option)
+
+        self.generate_output(options)
+
 
 
 agent = Agent()
