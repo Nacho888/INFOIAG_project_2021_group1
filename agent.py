@@ -136,19 +136,19 @@ class Agent:
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
 
-        # TODO: check properties access and apply filters
         preferred_restaurants = []
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
             cuisine = properties["hasCuisine"]
             if cuisine == preferredCuisine:
-                preferred_restaurants.append(cuisine)
+                preferred_restaurants.append(restaurant)
 
         if len(preferred_restaurants > 0):
             restaurants = preferred_restaurants
 
         for restaurant in restaurants:
-            if self.apply_restaurant_filters(restaurant, avoidCuisines, healthConditions):
+            properties = self.get_entity_values(restaurant)
+            if self.apply_restaurant_filters(properties, avoidCuisines, healthConditions):
                 option = {f"{properties['name']}": {"cuisine": properties["hasCuisine"], "neighbourhood": properties["establishedIn"], "meals": properties["hasCuisine"]["servesMeals"]}}
                 result.append(option)
 
