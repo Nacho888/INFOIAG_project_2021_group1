@@ -165,8 +165,10 @@ class Agent:
         for meal in meals:
             meal_properties = self.get_entity_values(meal)
             for food in meal_properties["hasFood"]:
-                if food in healthConditions:
-                    check = False
+                food_properties = self.get_entity_values(food)
+                for nutrient in food_properties["hasNutrients"]:
+                    if nutrient in healthConditions:
+                        check = False
 
         return check
 
