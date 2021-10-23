@@ -1,5 +1,7 @@
 import PySimpleGUI as sg
 import pandas as pd
+from owlready2 import *
+
 
 # Add some color to the window
 sg.theme('DarkTeal9')
@@ -7,23 +9,21 @@ sg.theme('DarkTeal9')
 excel_file = 'scenarios.xlsx'
 df = pd.read_excel(excel_file)
 
-cities_list = ['City 1', 'City 2', 'City 3', 'City 4', 'City 5', 'City 6', 'City 7']
-city_to_neighbourhoods = {
-    'City 1': ['Neighbourhood 1 in City 1', 'Neighbourhood 2 in City 1', 'Neighbourhood 3 in City 1'],
-    'City 2': ['Neighbourhood 1 in City 2', 'Neighbourhood 2 in City 2', 'Neighbourhood 3 in City 2'],
-    'City 3': ['Neighbourhood 1 in City 3', 'Neighbourhood 2 in City 3', 'Neighbourhood 3 in City 3'],
-    'City 4': ['Neighbourhood 1 in City 4', 'Neighbourhood 2 in City 4', 'Neighbourhood 3 in City 4'],
-    'City 5': ['Neighbourhood 1 in City 5', 'Neighbourhood 2 in City 5', 'Neighbourhood 3 in City 5'],
-    'City 6': ['Neighbourhood 1 in City 6', 'Neighbourhood 2 in City 6', 'Neighbourhood 3 in City 6'],
-    'City 7': ['Neighbourhood 1 in City 7', 'Neighbourhood 2 in City 7', 'Neighbourhood 3 in City 7'],
-}
 
-neighbourhoods_with_train_station = [
-    'Neighbourhood 1 in City 2', 'Neighbourhood 2 in City 2', 'Neighbourhood 3 in City 2',
-    'Neighbourhood 1 in City 5', 'Neighbourhood 2 in City 5', 'Neighbourhood 3 in City 5',
-    'Neighbourhood 1 in City 6', 'Neighbourhood 2 in City 6', 'Neighbourhood 3 in City 6',
-    'Neighbourhood 1 in City 7', 'Neighbourhood 2 in City 7', 'Neighbourhood 3 in City 7'
-]
+onto = get_ontology("infoiag_project_2021_group1.owl")
+onto.load()
+cities = onto.search(is_a=onto.City)
+cities_list = []
+city_to_neighbourhoods = {}
+neighbourhoods_with_train_station = []
+for element in cities:
+    if element.name == "City": continue
+    cities_list.append(element.name)
+    neighbourhoods = onto.search(is_a=onto.Neighbourhood,belongsToCity=element)
+    city_to_neighbourhoods[element.name] = [neigh.name for neigh in neighbourhoods]
+    if element.name == "amsterdam" or element.name == "utrecht": # these have train stations (hardcoded, because i coudlnt find hasTrainStation attribute)
+        neighbourhoods_with_train_station = neighbourhoods_with_train_station + [neigh.name for neigh in neighbourhoods]
+
 
 layout = [
     [sg.Text('Preffered cuisine or food choices', size=(30, 1)), sg.InputText(key='cuisine_food_pref')],
