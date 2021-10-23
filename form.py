@@ -34,22 +34,23 @@ layout = [
     # either the above or we make them enter their savings /salary as input text and then we determine whether we find them cheap moderate or expensive restaurants,
     # but they might want cheap restaurants even if they earn little or vice versa
 
-    [sg.Text('Do you want to eat out', size=(30, 1)), sg.Radio('Yes', "RADIO1",key="eat_out_yes", default=True),sg.Radio('No', "RADIO1",key="eat_out_no")],
-    # seems unnecesary, doesnt everyone?
+    # [sg.Text('Do you want to eat out', size=(30, 1)), sg.Radio('Yes', "RADIO1", key="eat_out_yes", default=True), sg.Radio('No', "RADIO1", key="eat_out_no")],
+    # # seems unnecesary, doesnt everyone?
 
-    [sg.Text('Select the city you live in', size=(30, 1)), sg.Combo(cities_list, key='select_cities',enable_events=True)],
-    [sg.Text('Select the neighbourhood you live in', size=(30, 1)), sg.Combo(['Please select a city first'], key='select_neighbourhood',enable_events=True)],
+    [sg.Text('Select the city you live in', size=(30, 1)), sg.Combo(cities_list, key='select_cities', enable_events=True)],
+    [sg.Text('Select the neighbourhood you live in', size=(30, 1)), sg.Combo(['Please select a city first'], key='select_neighbourhood', enable_events=True)],
 
 
-    [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)',key="pref_transport_gas_car"), sg.Checkbox('Car (electric)',key="pref_transport_electric_car"), sg.Checkbox('Ride-share',key="pref_transport_rideshare"), sg.Checkbox('Train',key="pref_transport_train"), sg.Checkbox('Bike',key="pref_transport_bike")],
+    [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)', key="pref_transport_gas_car"), sg.Checkbox('Car (electric)',key="pref_transport_electric_car"), sg.Checkbox('Ride-share', key="pref_transport_rideshare"), sg.Checkbox('Train',key="pref_transport_train"), sg.Checkbox('Bike', key="pref_transport_bike")],
 
-    [sg.Text('Select any health conditions you might have', size=(30, 1)), sg.Checkbox('COVID symptoms',key="condition_covid"),sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance',key="condition_lactose")],
+    [sg.Text('Select any health conditions you might have', size=(30, 1)), sg.Checkbox('COVID symptoms', key="condition_covid"), sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance', key="condition_lactose")],
 
-    [sg.Text('Select any additional prefferences', size=(30, 1)),sg.Radio('None', "RADIO2", default=True,key="pref_co2_none"),sg.Radio('Low Co2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2",key="pref_co2_low_transport")],
-    [sg.Text('', size=(30, 1)), sg.Radio('None', "RADIO3", default=True,key="pref_transport_none"),sg.Radio('Fast transport', "RADIO3",key="pref_transport_fast"), sg.Radio('Cheap transport', "RADIO3",key="pref_transport_cheap")],
+    [sg.Text('Select any additional prefferences', size=(30, 1)), sg.Radio('No CO2 preference', "RADIO2", default=True, key="pref_co2_none"),sg.Radio('Low CO2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2", key="pref_co2_low_transport")],
+    [sg.Text('', size=(30, 1)), sg.Radio('No transport preference', "RADIO3", default=True, key="pref_transport_none"), sg.Radio('Fast transport', "RADIO3",key="pref_transport_fast"), sg.Radio('Cheap transport', "RADIO3", key="pref_transport_cheap")],
 
     [sg.Submit(), sg.Button('Clear'), sg.Exit()]
 ]
+
 window = sg.Window('Simple data entry form', layout)
 
 def clear_input():
