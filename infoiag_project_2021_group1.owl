@@ -55,9 +55,6 @@
         <Class IRI="#Obligations"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Preferences"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#PreferredTransportation"/>
     </Declaration>
     <Declaration>
@@ -428,10 +425,6 @@
         </ObjectOneOf>
     </EquivalentClasses>
     <SubClassOf>
-        <Class IRI="#AvoidCuisines"/>
-        <Class IRI="#Preferences"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#COVID"/>
         <Class IRI="#HealthCondition"/>
     </SubClassOf>
@@ -443,30 +436,10 @@
         <Class IRI="#LactoseAllergy"/>
         <Class IRI="#HealthCondition"/>
     </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Obligations"/>
-        <Class IRI="#Preferences"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#PreferredTransportation"/>
-        <Class IRI="#Preferences"/>
-    </SubClassOf>
     <DisjointClasses>
         <Class IRI="#COVID"/>
         <Class IRI="#GlutenAllergy"/>
         <Class IRI="#LactoseAllergy"/>
-    </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#City"/>
-        <Class IRI="#Cuisine"/>
-        <Class IRI="#Food"/>
-        <Class IRI="#HealthCondition"/>
-        <Class IRI="#Meal"/>
-        <Class IRI="#Neighbourhood"/>
-        <Class IRI="#Preferences"/>
-        <Class IRI="#Restaurant"/>
-        <Class IRI="#User"/>
-        <Class IRI="#Wealth"/>
     </DisjointClasses>
     <ClassAssertion>
         <Class IRI="#City"/>
@@ -886,6 +859,11 @@
         <NamedIndividual IRI="#italian"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#cheese"/>
         <NamedIndividual IRI="#fat"/>
@@ -1096,6 +1074,11 @@
         <NamedIndividual IRI="#spanish"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#laTaberna"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#adjacentTo"/>
         <NamedIndividual IRI="#lombok"/>
         <NamedIndividual IRI="#sciencePark"/>
@@ -1284,6 +1267,11 @@
         <ObjectProperty IRI="#producedIn"/>
         <NamedIndividual IRI="#seafood"/>
         <NamedIndividual IRI="#seaside"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#spanish"/>
+        <NamedIndividual IRI="#spanishOmelette"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1708,10 +1696,6 @@
     <DataPropertyDomain>
         <DataProperty IRI="#squaredMeters"/>
         <Class IRI="#Neighbourhood"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#wantToEatOut"/>
-        <Class IRI="#Preferences"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#co2Footprint"/>
