@@ -52,12 +52,13 @@ class Agent:
 
 
     def get_entity_values(self, entity):
+        if type(entity) != str:
+            entity = self.ent_to_label[entity]
         candidate = self.get_levenshtein_distance(entity, self.label_to_ent.keys())
         if candidate is not None:
             result = {}
             for property in self.label_to_ent[candidate].get_properties():
-                for value in property[self.ontology[candidate]]:
-                    result[self.prop_to_label[property]] = value
+                result[self.prop_to_label[property]] = property[self.ontology[candidate]]
             return result
         print(f"No entity named {entity} found")
         return {}
@@ -220,11 +221,6 @@ class Agent:
 
 agent = Agent()
 
-# itself (we can remove this behavior) and all the subclass (I don't know why Car shows up here, maybe because of our
-# current implementation of the Transport relationship that we should reduce to electricCar and gasolineCar and get rid of Car)
-# print(agent.get_subclasses("Preferences"))
-
-# for now is just an empty set because we haven't set the property values (CO2 consumption, cost and duration)
-# print(agent.get_entity_values("bike"))
+print(agent.get_entity_values(agent.get_entity_values("laTaberna")["hasCuisine"][0]))
 
 # print(agent.data_dict)
