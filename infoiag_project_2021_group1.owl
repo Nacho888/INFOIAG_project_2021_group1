@@ -1269,6 +1269,11 @@
         <NamedIndividual IRI="#seaside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#spanish"/>
+        <NamedIndividual IRI="#spanishOmelette"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
         <NamedIndividual IRI="#spanishOmelette"/>
         <NamedIndividual IRI="#eggs"/>
