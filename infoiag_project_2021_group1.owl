@@ -22,6 +22,9 @@
         <Class IRI="#City"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Crowdedness"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Cuisine"/>
     </Declaration>
     <Declaration>
@@ -44,6 +47,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#Meal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MeetingFriendlyRestaurant"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Neighbourhood"/>
@@ -77,6 +83,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#belongsToCity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasCrowdedness"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasCuisine"/>
@@ -226,6 +235,9 @@
         <NamedIndividual IRI="#gluten"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#highCrowdedness"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#highFever"/>
     </Declaration>
     <Declaration>
@@ -256,7 +268,13 @@
         <NamedIndividual IRI="#lombok"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#lowFever"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#mediumCrowdedness"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#mediumFever"/>
@@ -361,6 +379,14 @@
         <NamedIndividual IRI="#zuilen"/>
     </Declaration>
     <EquivalentClasses>
+        <Class IRI="#Crowdedness"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#highCrowdedness"/>
+            <NamedIndividual IRI="#lowCrowdedness"/>
+            <NamedIndividual IRI="#mediumCrowdedness"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
         <Class IRI="#Cuisine"/>
         <ObjectOneOf>
             <NamedIndividual IRI="#fusion"/>
@@ -386,6 +412,16 @@
             <NamedIndividual IRI="#mountain"/>
             <NamedIndividual IRI="#seaside"/>
         </ObjectOneOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#MeetingFriendlyRestaurant"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Restaurant"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#hasCrowdedness"/>
+                <NamedIndividual IRI="#lowCrowdedness"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="#Nutrients"/>
@@ -566,6 +602,10 @@
         <NamedIndividual IRI="#gluten"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Crowdedness"/>
+        <NamedIndividual IRI="#highCrowdedness"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Fever"/>
         <NamedIndividual IRI="#highFever"/>
     </ClassAssertion>
@@ -606,8 +646,16 @@
         <NamedIndividual IRI="#lombok"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Crowdedness"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Fever"/>
         <NamedIndividual IRI="#lowFever"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Crowdedness"/>
+        <NamedIndividual IRI="#mediumCrowdedness"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Fever"/>
@@ -854,6 +902,11 @@
         <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#casaDiAlfredo"/>
         <NamedIndividual IRI="#italian"/>
@@ -1067,6 +1120,11 @@
         <ObjectProperty IRI="#producedIn"/>
         <NamedIndividual IRI="#kale"/>
         <NamedIndividual IRI="#countryside"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#laTaberna"/>
+        <NamedIndividual IRI="#highCrowdedness"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCuisine"/>
@@ -1434,6 +1492,10 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">40</Literal>
     </DataPropertyAssertion>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasCuisine"/>
         <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
     </SubObjectPropertyOf>
@@ -1503,6 +1565,10 @@
         <Class IRI="#Neighbourhood"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <Class IRI="#Restaurant"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasCuisine"/>
         <Class IRI="#Restaurant"/>
     </ObjectPropertyDomain>
@@ -1553,6 +1619,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#belongsToCity"/>
         <Class IRI="#City"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <Class IRI="#Crowdedness"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasCuisine"/>
