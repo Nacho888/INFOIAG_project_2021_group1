@@ -23,11 +23,11 @@ city_to_neighbourhoods = {}
 
 neighbourhoods_with_train_station = []
 for element in cities:
-    if element.name == "City": continue
+    if element.name == "City" or element.name =="BigCity": continue
     cities_list.append(element.name)
     neighbourhoods = onto.search(is_a=onto.Neighbourhood,belongsToCity=element)
     city_to_neighbourhoods[element.name] = [neigh.name for neigh in neighbourhoods]
-    if element.name == "amsterdam" or element.name == "utrecht": # these have train stations (hardcoded, because i coudlnt find hasTrainStation attribute)
+    if element.is_a[0] == onto.BigCity: # big cities have train stations
         neighbourhoods_with_train_station = neighbourhoods_with_train_station + [neigh.name for neigh in neighbourhoods]
 
 for meal in meals:
@@ -51,7 +51,7 @@ layout = [
     [sg.Text('Select the neighbourhood you live in', size=(30, 1)), sg.Combo(['Please select a city first'], key='select_neighbourhood', enable_events=True)],
 
 
-    [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)', key="pref_transport_gas_car"), sg.Checkbox('Car (electric)',key="pref_transport_electric_car"), sg.Checkbox('Ride-share', key="pref_transport_rideshare"), sg.Checkbox('Train',key="pref_transport_train"), sg.Checkbox('Bike', key="pref_transport_bike")],
+    [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)', key="pref_transport_gas_car"), sg.Checkbox('Car (electric)',key="pref_transport_electric_car"), sg.Checkbox('Ride-share', key="pref_transport_rideshare"), sg.Checkbox('Train',key="pref_transport_train"), sg.Checkbox('Bike', key="pref_transport_bike"),sg.Checkbox('Walking', key="pref_transport_walk")],
 
     [sg.Text('Select any health conditions you have', size=(30, 1)), sg.Checkbox('COVID symptoms', key="condition_covid"), sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance', key="condition_lactose")],
 
