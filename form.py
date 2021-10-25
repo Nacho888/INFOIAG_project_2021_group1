@@ -3,12 +3,10 @@ import pandas as pd
 from owlready2 import *
 
 
-# Add some color to the window
 sg.theme('DarkTeal9')
 
 excel_file = 'scenarios.xlsx'
 df = pd.read_excel(excel_file)
-
 
 onto = get_ontology("infoiag_project_2021_group1.owl")
 onto.load()
@@ -16,8 +14,6 @@ cities = onto.search(is_a=onto.City)
 meals = onto.search(is_a=onto.Cuisine)
 cities_list = []
 meals_list = []
-
-
 
 city_to_neighbourhoods = {}
 
@@ -33,7 +29,6 @@ for element in cities:
 for meal in meals:
     if meal.name == "Cuisine": continue
     meals_list.append(meal.name)
-
 
 layout = [
     [sg.Text('Preffered cuisine or food choices', size=(30, 1)), sg.Listbox(values=meals_list, size=(30, len(meals_list) + 1),select_mode="multiple", key='cuisine_food_pref', enable_events=True)],
@@ -55,7 +50,7 @@ layout = [
 
     [sg.Text('Select any health conditions you have', size=(30, 1)), sg.Checkbox('COVID symptoms', key="condition_covid"), sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance', key="condition_lactose")],
 
-    [sg.Text('Select any additional prefferences', size=(30, 1)), sg.Radio('No CO2 preference', "RADIO2", default=True, key="pref_co2_none"),sg.Radio('Low CO2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2", key="pref_co2_low_transport"),sg.Radio('Low Co2 food and transport', "RADIO2", key="pref_co2_low_food_and_transport")],
+    [sg.Text('Select any additional preferences', size=(30, 1)), sg.Radio('No CO2 preference', "RADIO2", default=True, key="pref_co2_none"),sg.Radio('Low CO2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2", key="pref_co2_low_transport"),sg.Radio('Low Co2 food and transport', "RADIO2", key="pref_co2_low_food_and_transport")],
     [sg.Text('', size=(30, 1)), sg.Radio('No transport preference', "RADIO3", default=True, key="pref_transport_none"), sg.Radio('Fast transport', "RADIO3",key="pref_transport_fast"), sg.Radio('Cheap transport', "RADIO3", key="pref_transport_cheap")],
 
     [sg.Submit(), sg.Button('Clear'), sg.Exit()]
@@ -107,7 +102,7 @@ while True:
         window.Element('select_neighbourhood').update(values=['Please select a city first'])
         window.Element('pref_co2_none').update(value=True)
         window.Element('pref_transport_none').update(value=True)
-        #window.Element('eat_out_yes').update(value=True)
+        # window.Element('eat_out_yes').update(value=True)
         window.Element('pref_transport_train').update(disabled=False)
 
 
