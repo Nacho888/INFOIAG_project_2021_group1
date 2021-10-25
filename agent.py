@@ -303,8 +303,34 @@ class Agent:
                     options.append(option)
 
         self.generate_output(options)
+        self.display_options()
 
 
+    def display_options(self):
+        options = json.loads("output.json")
+        output_str = ""
+
+        if not options:
+            output_str += f"The agent could not find a feasible combination of transport and food that complies with your preferences. Try to underconstraint a little bit your selection."
+        else:
+            finished = False
+            counter = 0
+            while not finished:
+                option = options[counter]
+                selected_option = options[option]
+                output_str += f"The selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences"
+                print(output_str + "\n")
+                if counter > 0:
+                    while get_top != "y" or more != "n":
+                        get_top = input("Do you want to see the best option again? (y/n): ")
+                        counter = 0
+                if get_top != "y":
+                    while more != "y" or more != "n":
+                        more = input("Do you want to see the next option? (y/n): ")
+                    if more == "y":
+                        counter += 1
+                    else:
+                        finished = True
 
 agent = Agent()
 

@@ -105,9 +105,9 @@ while True:
         # window.Element('eat_out_yes').update(value=True)
         window.Element('pref_transport_train').update(disabled=False)
 
-
         df = df.append(values, ignore_index=True)
         df.to_excel(excel_file, index=False)
         sg.popup('Data saved!')
         clear_input()
+
 window.close()
