@@ -48,7 +48,7 @@ layout = [
 
     [sg.Text('Select the modes of transport you preffer', size=(30, 1)),sg.Checkbox('Car (gas)', key="pref_transport_gas_car"), sg.Checkbox('Car (electric)',key="pref_transport_electric_car"), sg.Checkbox('Ride-share', key="pref_transport_rideshare"), sg.Checkbox('Train',key="pref_transport_train"), sg.Checkbox('Bike', key="pref_transport_bike"),sg.Checkbox('Walking', key="pref_transport_walk")],
 
-    [sg.Text('Select any health conditions you have', size=(30, 1)), sg.Checkbox('COVID symptoms', key="condition_covid"), sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance', key="condition_lactose")],
+    [sg.Text('Select any health conditions you have', size=(30, 1)), sg.Checkbox('Muscle ache', key="condition_muscle_ache"),sg.Checkbox('COVID symptoms', key="condition_covid"), sg.Checkbox('Gluten allergy',key="condition_gluten"), sg.Checkbox('Lactose intolerance', key="condition_lactose")],
 
     [sg.Text('Select any additional preferences', size=(30, 1)), sg.Radio('No CO2 preference', "RADIO2", default=True, key="pref_co2_none"),sg.Radio('Low CO2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2", key="pref_co2_low_transport"),sg.Radio('Low Co2 food and transport', "RADIO2", key="pref_co2_low_food_and_transport")],
     [sg.Text('', size=(30, 1)), sg.Radio('No transport preference', "RADIO3", default=True, key="pref_transport_none"), sg.Radio('Fast transport', "RADIO3",key="pref_transport_fast"), sg.Radio('Cheap transport', "RADIO3", key="pref_transport_cheap")],

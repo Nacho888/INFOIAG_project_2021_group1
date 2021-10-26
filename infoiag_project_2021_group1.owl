@@ -55,6 +55,9 @@
         <Class IRI="#MeetingFriendlyRestaurant"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#MuscleAche"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Neighbourhood"/>
     </Declaration>
     <Declaration>
@@ -549,6 +552,10 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#LactoseAllergy"/>
+        <Class IRI="#HealthCondition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MuscleAche"/>
         <Class IRI="#HealthCondition"/>
     </SubClassOf>
     <DisjointClasses>
