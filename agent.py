@@ -126,13 +126,14 @@ class Agent:
 
     def get_transports(self, locations, preferences_CO2, other_preferences, available_transports, health_conditions, neighbourhood):
         # I know that this could be cleaner... It's just a quick sketch, if someone wants to change atm, go for it ;)
+
         if "covid" in health_conditions:
             try:
                 available_transports.remove("train")
             except ValueError:
                 pass
 
-        if "fast" in other_preferences:
+        if "fast" in other_preferences or "muscleAche" in health_conditions:
             try:
                 available_transports.remove("walking")
             except ValueError:
@@ -166,7 +167,7 @@ class Agent:
             except ValueError:
                 pass
 
-        if "lowCO2Transport" in preferences_CO2 or "lowCO2All":
+        if "lowCO2Transport" in preferences_CO2 or "lowCO2All" in preferences_CO2:
             try:
                 available_transports.remove("gasolineCar")
             except ValueError:
@@ -180,7 +181,7 @@ class Agent:
         return available_transports, rideShares
 
 
-    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions):
+    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions, preferences_CO2):
         result = []
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
@@ -197,7 +198,7 @@ class Agent:
 
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
-            filtered = self.apply_restaurant_filters(properties, avoid_cuisines, health_conditions)
+            filtered = self.apply_restaurant_filters(properties, avoid_cuisines, health_conditions, preferences_CO2)
             if len(filtered) > 0:
                 cuisine = self.get_entity_values(properties["hasCuisine"])
                 option = {f"{properties['name']}": {"cuisine": cuisine, "neighbourhood": properties["establishedIn"], "meals": filtered}}
@@ -206,7 +207,7 @@ class Agent:
         return result
 
 
-    def apply_restaurant_filters(self, restaurant, avoid_cuisines, health_conditions):
+    def apply_restaurant_filters(self, restaurant, avoid_cuisines, health_conditions, preferences_CO2):
         ok_meals = []
 
         cuisine = self.get_entity_values(restaurant["hasCuisine"])
@@ -223,6 +224,8 @@ class Agent:
                 for nutrient in self.get_entity_values(food_properties["hasNutrients"]):
                     if nutrient in health_conditions:
                         check_food = False
+                if ("lowCO2Food" in preferences_CO2 or "lowCO2All" in preferences_CO2) and food_properties["co2Footprint"] > 50:
+                    check_food = False
                 if check_food:
                     ok_meals.append(meal)
 
@@ -274,7 +277,7 @@ class Agent:
         options = []
 
         # Preference preprocessing
-        health_conditions = self.process_preferences([df["condition_covid"], df["condition_gluten"], df["condition_lactose"]], ["covid", "gluten", "lactose"])
+        health_conditions = self.process_preferences([df["condition_muscle_ache"], df["condition_covid"], df["condition_gluten"], df["condition_lactose"]], ["muscleAche", "covid", "gluten", "lactose"])
         transport_preferences = self.process_preferences(df["pref_transport_bike"], df["pref_transport_electric_car"], df["pref_transport_gas_car"], df["pref_transport_rideshare"], df["pref_transport_train"], ["bike", "electricCar", "gasolineCar", "rideShare", "train"])
         preferred_cuisines = self.process_input_lists(df["cuisine_food_pref"])
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
@@ -282,7 +285,7 @@ class Agent:
         other_preferences = self.process_preferences([df["pref_transport_fast"], df["restaurant_price_range"]], ["fast"])
 
         # Preference matching
-        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions)
+        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2)
         locations = self.get_restaurants_location(restaurants)
         available_transports, ride_shares = self.get_transports(locations, low_co2, other_preferences, transport_preferences, health_conditions, df["select_neighbourhood"])
 
@@ -315,6 +318,7 @@ class Agent:
         else:
             finished = False
             counter = 0
+            get_top, more = ""
             while not finished:
                 option = options[counter]
                 selected_option = options[option]
