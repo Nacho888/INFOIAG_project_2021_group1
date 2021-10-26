@@ -49,8 +49,9 @@ for element in cities:
     cities_list.append(element.name)
     neighbourhoods = onto.search(is_a=onto.Neighbourhood,belongsToCity=element)
     city_to_neighbourhoods[element.name] = [neigh.name for neigh in neighbourhoods]
-    if element.is_a[0] == onto.BigCity: # big cities have train stations
+    if element.is_a[0] == onto.BigCity: # big cities have neighbourhoods with more than 20 000 inhabitants and have train stations in each
         neighbourhoods_with_train_station = neighbourhoods_with_train_station + [neigh.name for neigh in neighbourhoods]
+        # they also have electric car charging ports
 
 for meal in meals:
     if meal.name == "Cuisine": continue

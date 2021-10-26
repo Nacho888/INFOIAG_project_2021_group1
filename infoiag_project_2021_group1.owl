@@ -1445,6 +1445,11 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
+        <NamedIndividual IRI="#VilasKrishna"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRestaurant"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
         <NamedIndividual IRI="#casaDiAlfredo"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -1551,6 +1556,11 @@
         <ObjectProperty IRI="#belongsToCity"/>
         <NamedIndividual IRI="#lombok"/>
         <NamedIndividual IRI="#utrecht"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRestaurant"/>
+        <NamedIndividual IRI="#lombok"/>
+        <NamedIndividual IRI="#LunchroomTurkey"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1736,6 +1746,11 @@
         <ObjectProperty IRI="#belongsToCity"/>
         <NamedIndividual IRI="#sciencePark"/>
         <NamedIndividual IRI="#utrecht"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRestaurant"/>
+        <NamedIndividual IRI="#sciencePark"/>
+        <NamedIndividual IRI="#OudChina"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -2000,12 +2015,172 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#zuilen"/>
+        <NamedIndividual IRI="#ThaiHong"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRestaurant"/>
+        <NamedIndividual IRI="#zuilen"/>
         <NamedIndividual IRI="#arigatoSushiBar"/>
     </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#algea_roll"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#amsterdamCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#amsterdamCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#amsterdamCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">30000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#amsterdamCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#amsterdamNoord"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#amsterdamNoord"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#amsterdamNoord"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">32000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#amsterdamNoord"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#amsterdamZuid"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#amsterdamZuid"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#amsterdamZuid"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">41420</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#amsterdamZuid"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#banana"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">14</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#beef"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+    </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#bike"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#broccolli"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">14</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#cabbage"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#carrots"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#cheese"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">93</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#chicken"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">64</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#chocolate"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">86</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#coconut"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">14</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#deKoog"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#deKoog"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#deKoog"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#deKoog"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#deWaal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#deWaal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#deWaal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#deWaal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#eggs"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">50</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
@@ -2019,6 +2194,16 @@
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#fish"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">57</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#flour"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
         <NamedIndividual IRI="#gasolineCar"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">90</Literal>
     </DataPropertyAssertion>
@@ -2026,6 +2211,91 @@
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#gasolineCar"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">70</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1200</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#kale"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">28</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#lombok"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#lombok"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#lombok"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">34000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#lombok"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#noodles"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#pork"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">71</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#potato"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#reichenau"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#reichenau"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#reichenau"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#reichenau"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#rice"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">43</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
@@ -2043,6 +2313,66 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#saggen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#saggen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#saggen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#saggen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#sciencePark"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#sciencePark"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#sciencePark"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">31000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#sciencePark"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#seafood"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">78</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#steak"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#tofu"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">21</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#tomato"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">28</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
         <NamedIndividual IRI="#train"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
@@ -2051,6 +2381,41 @@
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#train"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">40</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#walking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#cost"/>
+        <NamedIndividual IRI="#walking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#yogurt"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">93</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrainStation"/>
+        <NamedIndividual IRI="#zuilen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nChargingPoints"/>
+        <NamedIndividual IRI="#zuilen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#nHabitants"/>
+        <NamedIndividual IRI="#zuilen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">61000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#squaredMeters"/>
+        <NamedIndividual IRI="#zuilen"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10000</Literal>
     </DataPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasCrowdedness"/>
