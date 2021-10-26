@@ -8,6 +8,32 @@ sg.theme('DarkTeal9')
 excel_file = 'scenarios.xlsx'
 df = pd.read_excel(excel_file)
 
+foods_to_co2_emissions = {
+    "steak":100,
+    "beef":100,
+    "yogurt":93,
+    "cheese":93,
+    "chocolate":86,
+    "seafood":78,
+    "pork":71,
+    "chicken":64,
+    "fish":57,
+    "eggs":50,
+    "rice":43,
+    "noodles":36,
+    "flour":36,
+    "kale":28,
+    "tomato":28,
+    "tofu":21,
+    "coconut": 14,
+    "broccolli": 14,
+    "banana":14,
+    "potato":7,
+    "carrots":7,
+    "cabbage":7,
+    "algea_roll":1
+}
+
 onto = get_ontology("infoiag_project_2021_group1.owl")
 onto.load()
 cities = onto.search(is_a=onto.City)
