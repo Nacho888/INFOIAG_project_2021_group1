@@ -526,6 +526,7 @@
             <NamedIndividual IRI="#gasolineCar"/>
             <NamedIndividual IRI="#rideShare"/>
             <NamedIndividual IRI="#train"/>
+            <NamedIndividual IRI="#walking"/>
         </ObjectOneOf>
     </EquivalentClasses>
     <EquivalentClasses>
@@ -536,6 +537,7 @@
             <NamedIndividual IRI="#gasolineCar"/>
             <NamedIndividual IRI="#rideShare"/>
             <NamedIndividual IRI="#train"/>
+            <NamedIndividual IRI="#walking"/>
         </ObjectOneOf>
     </EquivalentClasses>
     <SubClassOf>
