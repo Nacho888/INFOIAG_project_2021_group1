@@ -154,6 +154,18 @@
         <DataProperty IRI="#wantToEatOut"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#LunchroomTurkey"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#OudChina"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ThaiHong"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#VilasKrishna"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#algea_roll"/>
     </Declaration>
     <Declaration>
@@ -545,6 +557,22 @@
         <Class IRI="#LactoseAllergy"/>
     </DisjointClasses>
     <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#LunchroomTurkey"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#OudChina"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#ThaiHong"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#VilasKrishna"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#algea_roll"/>
     </ClassAssertion>
@@ -961,6 +989,46 @@
         <NamedIndividual IRI="#zuilen"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#LunchroomTurkey"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#LunchroomTurkey"/>
+        <NamedIndividual IRI="#turkish"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#OudChina"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#OudChina"/>
+        <NamedIndividual IRI="#chinese"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#ThaiHong"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#ThaiHong"/>
+        <NamedIndividual IRI="#thai"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#VilasKrishna"/>
+        <NamedIndividual IRI="#highCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#VilasKrishna"/>
+        <NamedIndividual IRI="#indian"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#algea_roll"/>
         <NamedIndividual IRI="#protein"/>
@@ -1021,9 +1089,19 @@
         <NamedIndividual IRI="#everGreen"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#arigatoSushiBar"/>
         <NamedIndividual IRI="#japanese"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
+        <NamedIndividual IRI="#everGreen"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -1151,6 +1229,31 @@
         <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#chinese"/>
+        <NamedIndividual IRI="#hotpot"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#chinese"/>
+        <NamedIndividual IRI="#misoSoup"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#chinese"/>
+        <NamedIndividual IRI="#ramen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#chinese"/>
+        <NamedIndividual IRI="#shrimpGarlic"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#chinese"/>
+        <NamedIndividual IRI="#sichuanPork"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#chocolate"/>
         <NamedIndividual IRI="#fat"/>
@@ -1231,6 +1334,11 @@
         <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#everGreen"/>
+        <NamedIndividual IRI="#highCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#everGreen"/>
         <NamedIndividual IRI="#vegan"/>
@@ -1289,6 +1397,21 @@
         <ObjectProperty IRI="#hasFood"/>
         <NamedIndividual IRI="#hotpot"/>
         <NamedIndividual IRI="#pork"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#indian"/>
+        <NamedIndividual IRI="#butterChicken"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#indian"/>
+        <NamedIndividual IRI="#fishCurry"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#indian"/>
+        <NamedIndividual IRI="#palakPaneer"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedAt"/>
@@ -1686,9 +1809,19 @@
         <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+        <NamedIndividual IRI="#mediumCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#stormKitchen"/>
         <NamedIndividual IRI="#fusion"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1744,6 +1877,26 @@
         <ObjectProperty IRI="#locatedAt"/>
         <NamedIndividual IRI="#texel"/>
         <NamedIndividual IRI="#island"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#thai"/>
+        <NamedIndividual IRI="#curryTofu"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#thai"/>
+        <NamedIndividual IRI="#kaoKaMoo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#thai"/>
+        <NamedIndividual IRI="#khaoSoi"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesMeals"/>
+        <NamedIndividual IRI="#thai"/>
+        <NamedIndividual IRI="#padKraPrao"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
