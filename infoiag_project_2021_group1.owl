@@ -1971,7 +1971,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#amsterdamCentre"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -1991,7 +1991,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#amsterdamNoord"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2011,7 +2011,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#amsterdamZuid"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2091,7 +2091,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#deKoog"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2111,7 +2111,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#deWaal"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2176,7 +2176,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2201,7 +2201,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#lombok"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2236,7 +2236,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#reichenau"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2266,17 +2266,12 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#rideShare"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">30</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#cost"/>
-        <NamedIndividual IRI="#rideShare"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#saggen"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2296,7 +2291,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#sciencePark"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2371,7 +2366,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
         <NamedIndividual IRI="#zuilen"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#nChargingPoints"/>
@@ -2571,9 +2566,6 @@
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
     <FunctionalDataProperty>
-        <DataProperty IRI="#co2Footprint"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
         <DataProperty IRI="#duration"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
@@ -2622,7 +2614,7 @@
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#co2Footprint"/>
-        <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#cost"/>
