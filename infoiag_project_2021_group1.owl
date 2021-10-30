@@ -109,13 +109,7 @@
         <ObjectProperty IRI="#hasRestaurant"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#hasTransport"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#isCheaperThan"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#livesIn"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#locatedAt"/>
@@ -145,16 +139,7 @@
         <DataProperty IRI="#nHabitants"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#salary"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#savings"/>
-    </Declaration>
-    <Declaration>
         <DataProperty IRI="#squaredMeters"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#wantToEatOut"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#LunchroomTurkey"/>
@@ -2464,9 +2449,6 @@
         <ObjectProperty IRI="#hasCuisine"/>
     </FunctionalObjectProperty>
     <FunctionalObjectProperty>
-        <ObjectProperty IRI="#livesIn"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
         <ObjectProperty IRI="#locatedAt"/>
     </FunctionalObjectProperty>
     <InverseFunctionalObjectProperty>
@@ -2511,16 +2493,8 @@
         <Class IRI="#Neighbourhood"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasTransport"/>
-        <Class IRI="#User"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#isCheaperThan"/>
         <Class IRI="#Restaurant"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#livesIn"/>
-        <Class IRI="#User"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#locatedAt"/>
@@ -2567,16 +2541,8 @@
         <Class IRI="#Restaurant"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasTransport"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="#isCheaperThan"/>
         <Class IRI="#Restaurant"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#livesIn"/>
-        <Class IRI="#Neighbourhood"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#locatedAt"/>
@@ -2615,14 +2581,6 @@
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
     <SubDataPropertyOf>
-        <DataProperty IRI="#salary"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#savings"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
         <DataProperty IRI="#squaredMeters"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
@@ -2642,16 +2600,7 @@
         <DataProperty IRI="#nHabitants"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
-        <DataProperty IRI="#salary"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#savings"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
         <DataProperty IRI="#squaredMeters"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#wantToEatOut"/>
     </FunctionalDataProperty>
     <DataPropertyDomain>
         <DataProperty IRI="#co2Footprint"/>
@@ -2682,14 +2631,6 @@
         <Class IRI="#Neighbourhood"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#salary"/>
-        <Class IRI="#Wealth"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#savings"/>
-        <Class IRI="#Wealth"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
         <DataProperty IRI="#squaredMeters"/>
         <Class IRI="#Neighbourhood"/>
     </DataPropertyDomain>
@@ -2718,20 +2659,8 @@
         <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
     </DataPropertyRange>
     <DataPropertyRange>
-        <DataProperty IRI="#salary"/>
-        <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#savings"/>
-        <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
         <DataProperty IRI="#squaredMeters"/>
         <Datatype abbreviatedIRI="xsd:positiveInteger"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#wantToEatOut"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
 </Ontology>
 
