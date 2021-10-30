@@ -339,3 +339,5 @@ class Agent:
 agent = Agent()
 
 # print(agent.data_dict)
+
+agent.reasoning(1)
