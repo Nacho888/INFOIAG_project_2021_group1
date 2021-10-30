@@ -71,7 +71,7 @@ class Agent:
     def get_transport_utility(self, transport):
         properties = self.get_entity_values(transport)
         try:
-            result = 0.6 * properties["co2Footprint"] + 0.3 * properties["cost"] + 0.1 * properties["duration"]
+            result = 0.6 * abs(properties["co2Footprint"] - 100) + 0.3 * abs(properties["cost"] - 100) + 0.1 * abs(properties["duration"] - 100)
             return result
         except KeyError:
             print("Error when processing the transport utility")
@@ -94,7 +94,7 @@ class Agent:
         properties_food = self.get_entity_values(food)
         location = self.ent_to_label[location]
         try:
-            result = properties_food["co2Footprint"]
+            result = abs(properties_food["co2Footprint"] - 100)
             if properties_food["producedIn"] == location:
                 result = result * 0.25
         except KeyError:
