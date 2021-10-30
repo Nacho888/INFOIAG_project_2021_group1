@@ -67,19 +67,10 @@
         <Class IRI="#Obligations"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#PreferredTransportation"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Restaurant"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Transport"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#User"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Wealth"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#adjacentTo"/>
@@ -142,19 +133,7 @@
         <DataProperty IRI="#squaredMeters"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#LunchroomTurkey"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#OudChina"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#ThaiHong"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#VilasKrishna"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#amsterdam"/>
@@ -307,6 +286,9 @@
         <NamedIndividual IRI="#lowFever"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#mediumCrowdedness"/>
     </Declaration>
     <Declaration>
@@ -320,6 +302,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#noodles"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#oudChina"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#padKraPrao"/>
@@ -406,6 +391,9 @@
         <NamedIndividual IRI="#thai"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#thaiHong"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#tofu"/>
     </Declaration>
     <Declaration>
@@ -428,6 +416,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#vegan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#vilasKrishna"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#vitamins"/>
@@ -504,17 +495,6 @@
         </ObjectOneOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#PreferredTransportation"/>
-        <ObjectOneOf>
-            <NamedIndividual IRI="#bike"/>
-            <NamedIndividual IRI="#electricCar"/>
-            <NamedIndividual IRI="#gasolineCar"/>
-            <NamedIndividual IRI="#rideShare"/>
-            <NamedIndividual IRI="#train"/>
-            <NamedIndividual IRI="#walking"/>
-        </ObjectOneOf>
-    </EquivalentClasses>
-    <EquivalentClasses>
         <Class IRI="#Transport"/>
         <ObjectOneOf>
             <NamedIndividual IRI="#bike"/>
@@ -551,24 +531,8 @@
         <Class IRI="#LactoseAllergy"/>
     </DisjointClasses>
     <ClassAssertion>
-        <Class IRI="#Restaurant"/>
-        <NamedIndividual IRI="#LunchroomTurkey"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Restaurant"/>
-        <NamedIndividual IRI="#OudChina"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Restaurant"/>
-        <NamedIndividual IRI="#ThaiHong"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Restaurant"/>
-        <NamedIndividual IRI="#VilasKrishna"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Food"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#BigCity"/>
@@ -601,10 +565,6 @@
     <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#beef"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#bike"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Transport"/>
@@ -675,10 +635,6 @@
         <NamedIndividual IRI="#eggs"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#electricCar"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Transport"/>
         <NamedIndividual IRI="#electricCar"/>
     </ClassAssertion>
@@ -705,10 +661,6 @@
     <ClassAssertion>
         <Class IRI="#Cuisine"/>
         <NamedIndividual IRI="#fusion"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#gasolineCar"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Transport"/>
@@ -787,6 +739,10 @@
         <NamedIndividual IRI="#lowFever"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Crowdedness"/>
         <NamedIndividual IRI="#mediumCrowdedness"/>
     </ClassAssertion>
@@ -805,6 +761,10 @@
     <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#noodles"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#oudChina"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Meal"/>
@@ -853,10 +813,6 @@
     <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#rice"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#rideShare"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Transport"/>
@@ -923,16 +879,16 @@
         <NamedIndividual IRI="#thai"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#thaiHong"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#tofu"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#tomato"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#train"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Transport"/>
@@ -963,12 +919,12 @@
         <NamedIndividual IRI="#vegan"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Nutrients"/>
-        <NamedIndividual IRI="#vitamins"/>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#PreferredTransportation"/>
-        <NamedIndividual IRI="#walking"/>
+        <Class IRI="#Nutrients"/>
+        <NamedIndividual IRI="#vitamins"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Transport"/>
@@ -983,58 +939,18 @@
         <NamedIndividual IRI="#zuilen"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCrowdedness"/>
-        <NamedIndividual IRI="#LunchroomTurkey"/>
-        <NamedIndividual IRI="#lowCrowdedness"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCuisine"/>
-        <NamedIndividual IRI="#LunchroomTurkey"/>
-        <NamedIndividual IRI="#turkish"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCrowdedness"/>
-        <NamedIndividual IRI="#OudChina"/>
-        <NamedIndividual IRI="#lowCrowdedness"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCuisine"/>
-        <NamedIndividual IRI="#OudChina"/>
-        <NamedIndividual IRI="#chinese"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCrowdedness"/>
-        <NamedIndividual IRI="#ThaiHong"/>
-        <NamedIndividual IRI="#lowCrowdedness"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCuisine"/>
-        <NamedIndividual IRI="#ThaiHong"/>
-        <NamedIndividual IRI="#thai"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCrowdedness"/>
-        <NamedIndividual IRI="#VilasKrishna"/>
-        <NamedIndividual IRI="#highCrowdedness"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCuisine"/>
-        <NamedIndividual IRI="#VilasKrishna"/>
-        <NamedIndividual IRI="#indian"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
         <NamedIndividual IRI="#protein"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
         <NamedIndividual IRI="#vitamins"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#producedIn"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
         <NamedIndividual IRI="#seaside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -1430,12 +1346,12 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
-        <NamedIndividual IRI="#VilasKrishna"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
-        <NamedIndividual IRI="#casaDiAlfredo"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#servesMeals"/>
@@ -1545,7 +1461,17 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#lombok"/>
-        <NamedIndividual IRI="#LunchroomTurkey"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+        <NamedIndividual IRI="#turkish"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1591,6 +1517,16 @@
         <ObjectProperty IRI="#producedIn"/>
         <NamedIndividual IRI="#noodles"/>
         <NamedIndividual IRI="#seaside"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#oudChina"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#oudChina"/>
+        <NamedIndividual IRI="#chinese"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1735,7 +1671,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#sciencePark"/>
-        <NamedIndividual IRI="#OudChina"/>
+        <NamedIndividual IRI="#oudChina"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -1835,7 +1771,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
         <NamedIndividual IRI="#sushi"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1850,7 +1786,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
         <NamedIndividual IRI="#sushiBurrito"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1906,6 +1842,16 @@
         <ObjectProperty IRI="#servesMeals"/>
         <NamedIndividual IRI="#thai"/>
         <NamedIndividual IRI="#padKraPrao"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#thaiHong"/>
+        <NamedIndividual IRI="#lowCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#thaiHong"/>
+        <NamedIndividual IRI="#thai"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -1978,6 +1924,16 @@
         <NamedIndividual IRI="#curryTofu"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrowdedness"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
+        <NamedIndividual IRI="#highCrowdedness"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCuisine"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
+        <NamedIndividual IRI="#indian"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#yogurt"/>
         <NamedIndividual IRI="#lactose"/>
@@ -2000,16 +1956,16 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#zuilen"/>
-        <NamedIndividual IRI="#ThaiHong"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#zuilen"/>
-        <NamedIndividual IRI="#arigatoSushiBar"/>
+        <NamedIndividual IRI="#thaiHong"/>
     </ObjectPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
-        <NamedIndividual IRI="#algea_roll"/>
+        <NamedIndividual IRI="#algeaRoll"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
@@ -2083,9 +2039,19 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#co2Footprint"/>
+        <NamedIndividual IRI="#bike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#bike"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#bike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">75</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
@@ -2178,6 +2144,11 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">90</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#electricCar"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">30</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
         <NamedIndividual IRI="#fish"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">57</Literal>
@@ -2196,6 +2167,11 @@
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#gasolineCar"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">70</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#gasolineCar"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>
@@ -2368,6 +2344,11 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">40</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#train"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">50</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
         <NamedIndividual IRI="#walking"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
@@ -2376,6 +2357,11 @@
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#walking"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#walking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#co2Footprint"/>
