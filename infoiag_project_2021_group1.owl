@@ -1009,6 +1009,16 @@
         <NamedIndividual IRI="#japanese"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
+        <NamedIndividual IRI="#amsterdamNoord"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#arigatoSushiBar"/>
+        <NamedIndividual IRI="#zuilen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#isCheaperThan"/>
         <NamedIndividual IRI="#arigatoSushiBar"/>
         <NamedIndividual IRI="#everGreen"/>
@@ -1097,6 +1107,16 @@
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#casaDiAlfredo"/>
         <NamedIndividual IRI="#italian"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#casaDiAlfredo"/>
+        <NamedIndividual IRI="#reichenau"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#isCheaperThan"/>
@@ -1254,6 +1274,11 @@
         <NamedIndividual IRI="#vegan"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#everGreen"/>
+        <NamedIndividual IRI="#saggen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#fish"/>
         <NamedIndividual IRI="#protein"/>
@@ -1282,6 +1307,11 @@
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#flour"/>
         <NamedIndividual IRI="#gluten"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#producedIn"/>
+        <NamedIndividual IRI="#flour"/>
+        <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#servesMeals"/>
@@ -1439,6 +1469,16 @@
         <NamedIndividual IRI="#spanish"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#laTaberna"/>
+        <NamedIndividual IRI="#deKoog"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#laTaberna"/>
+        <NamedIndividual IRI="#saggen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#isCheaperThan"/>
         <NamedIndividual IRI="#laTaberna"/>
         <NamedIndividual IRI="#casaDiAlfredo"/>
@@ -1472,6 +1512,11 @@
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#lunchroomTurkey"/>
         <NamedIndividual IRI="#turkish"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+        <NamedIndividual IRI="#lombok"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1527,6 +1572,11 @@
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#oudChina"/>
         <NamedIndividual IRI="#chinese"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#oudChina"/>
+        <NamedIndividual IRI="#sciencePark"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1599,6 +1649,16 @@
         <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNutrients"/>
+        <NamedIndividual IRI="#potato"/>
+        <NamedIndividual IRI="#protein"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNutrients"/>
+        <NamedIndividual IRI="#potato"/>
+        <NamedIndividual IRI="#vitamins"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#producedIn"/>
         <NamedIndividual IRI="#potato"/>
         <NamedIndividual IRI="#countryside"/>
@@ -1647,6 +1707,16 @@
         <ObjectProperty IRI="#hasRestaurant"/>
         <NamedIndividual IRI="#reichenau"/>
         <NamedIndividual IRI="#stormKitchen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasNutrients"/>
+        <NamedIndividual IRI="#rice"/>
+        <NamedIndividual IRI="#vitamins"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#producedIn"/>
+        <NamedIndividual IRI="#rice"/>
+        <NamedIndividual IRI="#countryside"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#belongsToCity"/>
@@ -1764,6 +1834,21 @@
         <NamedIndividual IRI="#fusion"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+        <NamedIndividual IRI="#amsterdamCentre"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+        <NamedIndividual IRI="#deWaal"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#stormKitchen"/>
+        <NamedIndividual IRI="#reichenau"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#isCheaperThan"/>
         <NamedIndividual IRI="#stormKitchen"/>
         <NamedIndividual IRI="#arigatoSushiBar"/>
@@ -1854,9 +1939,24 @@
         <NamedIndividual IRI="#thai"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#thaiHong"/>
+        <NamedIndividual IRI="#zuilen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#tofu"/>
         <NamedIndividual IRI="#protein"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#producedIn"/>
+        <NamedIndividual IRI="#tofu"/>
+        <NamedIndividual IRI="#countryside"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#producedIn"/>
+        <NamedIndividual IRI="#tofu"/>
+        <NamedIndividual IRI="#mountain"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -1932,6 +2032,11 @@
         <ObjectProperty IRI="#hasCuisine"/>
         <NamedIndividual IRI="#vilasKrishna"/>
         <NamedIndividual IRI="#indian"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasEstablishmentAt"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
+        <NamedIndividual IRI="#innsbruckCentre"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>

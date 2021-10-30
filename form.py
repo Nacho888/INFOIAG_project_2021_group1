@@ -8,6 +8,15 @@ sg.theme('DarkTeal9')
 excel_file = 'scenarios.xlsx'
 df = pd.read_excel(excel_file)
 
+df.to_json("scenarios.json", indent=4)
+
+json_file = "scenarios.json"
+df2 = pd.read_json(json_file)
+
+
+# json_file = "scenarios.json"
+# df = pd.read_excel(json_file)
+
 foods_to_co2_emissions = {
     "steak":100,
     "beef":100,
@@ -133,7 +142,7 @@ while True:
         window.Element('pref_transport_train').update(disabled=False)
 
         df = df.append(values, ignore_index=True)
-        df.to_excel(excel_file, index=False)
+        df.to_json(excel_file, index=False)
         sg.popup('Data saved!')
         clear_input()
 

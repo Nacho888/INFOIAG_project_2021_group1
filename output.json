@@ -1,23 +1,9 @@
 {
-	"option2": {
-		"transport": "train",
-		"restaurant": "pizza hut",
-		"meal": "pizza carbonara",
-		"co2": 40,
-		"utility": 0.85
-	},
-	"option3": {
-		"transport": "bike",
-		"restaurant": "burguer king",
-		"meal": "crispy chicken",
-		"co2": 10,
-		"utility": 0.9
-	},
-	"option1": {
-		"transport": "car",
-		"restaurant": "pasta world",
-		"meal": "lasagna",
-		"co2": 80,
-		"utility": 0.65
-	}
+    "option1": {
+        "transport": "bike",
+        "restaurant": "stormKitchen",
+        "meal": "sushiBurrito",
+        "co2": 242,
+        "utility": 165.75
+    }
 }

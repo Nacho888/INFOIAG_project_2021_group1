@@ -71,19 +71,26 @@ class Agent:
     def get_transport_utility(self, transport):
         properties = self.get_entity_values(transport)
         try:
-            result = 0.6 * abs(properties["co2Footprint"] - 100) + 0.3 * abs(properties["cost"] - 100) + 0.1 * abs(properties["duration"] - 100)
+            result = 0.6 * abs(properties["co2Footprint"][0] - 100) + 0.3 * abs(properties["cost"][0] - 100) + 0.1 * abs(properties["duration"][0] - 100)
             return result
         except KeyError:
             print("Error when processing the transport utility")
             return 0
 
 
+    # def change_range_value(self, value, old_min, old_max, new_min, new_max):
+    #     old_range = old_max - old_min
+    #     new_range = new_max - new_min
+    #     return ((value - old_min) * new_range) / old_range + new_min
+
+
     def get_food_utility(self, meal, location):
         try:
             result = 0
             meal = self.get_entity_values(meal)
-            for food in meal["foods"]:
+            for food in meal["hasFood"]:
                 result += self.check_food_co2_discount(food, location)
+            # return self.change_range_value(result, 0, result, 0, 100))
             return result
         except KeyError:
             print("Error when processing the food utility")
@@ -92,11 +99,13 @@ class Agent:
 
     def check_food_co2_discount(self, food, location):
         properties_food = self.get_entity_values(food)
-        location = self.ent_to_label[location]
+        properties_neighbourhood = self.get_entity_values(location[0])
+        city = properties_neighbourhood["belongsToCity"][0]
         try:
-            result = abs(properties_food["co2Footprint"] - 100)
-            if properties_food["producedIn"] == location:
+            result = abs(properties_food["co2Footprint"][0] - 100)
+            if properties_food["producedIn"][0] == self.get_entity_values(city)["locatedAt"]:
                 result = result * 0.25
+            return result
         except KeyError:
             print("Error when processing the food CO2 discount")
             return 0
@@ -107,16 +116,17 @@ class Agent:
         for i, option in enumerate(options, start=1):
             result[f"option{i}"] = {"transport": option["transport"], "restaurant": option["restaurant"],
             "meal": option["meal"], "co2": option["co2"], "utility": option["utility"]}
-        sorted_tuples = sorted(result.items(), key=lambda x: x["utility"])
+        sorted_tuples = sorted(result.items(), key=lambda x: x[1]["utility"])
         sorted_result = {k: v for k, v in sorted_tuples}
-        json.dumps(sorted_result, indent=4)
+        with open("output.json", "w") as f:
+            json.dump(sorted_result, f, indent=4)
 
 
     def calculate_co2(self, transport, meal, location):
         total_co2 = 0
         properties_transport = self.get_entity_values(transport)
         try:
-            total_co2 += properties_transport["co2Footprint"]
+            total_co2 += properties_transport["co2Footprint"][0]
             total_co2 += self.get_food_utility(meal, location)
             return total_co2
         except KeyError:
@@ -189,19 +199,19 @@ class Agent:
         preferred_restaurants = []
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
-            cuisine = properties["hasCuisine"]
+            cuisine = self.ent_to_label[properties["hasCuisine"][0]]
             if cuisine in preferred_cuisines:
                 preferred_restaurants.append(restaurant)
 
-        if len(preferred_restaurants > 0):
+        if len(preferred_restaurants) > 0:
             restaurants = preferred_restaurants
 
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
             filtered = self.apply_restaurant_filters(properties, avoid_cuisines, health_conditions, preferences_CO2)
             if len(filtered) > 0:
-                cuisine = self.get_entity_values(properties["hasCuisine"])
-                option = {f"{properties['name']}": {"cuisine": cuisine, "neighbourhood": properties["establishedIn"], "meals": filtered}}
+                cuisine = self.get_entity_values(properties["hasCuisine"][0])
+                option = {f"{self.ent_to_label[restaurant]}": {"cuisine": cuisine, "neighbourhood": properties["hasEstablishmentAt"], "meals": filtered}}
                 result.append(option)
 
         return result
@@ -210,24 +220,24 @@ class Agent:
     def apply_restaurant_filters(self, restaurant, avoid_cuisines, health_conditions, preferences_CO2):
         ok_meals = []
 
-        cuisine = self.get_entity_values(restaurant["hasCuisine"])
+        cuisine = self.get_entity_values(restaurant["hasCuisine"][0])
 
         if cuisine in avoid_cuisines:
             return ok_meals
 
-        meals = self.get_entity_values(cuisine["servesMeals"])
-        for meal in meals:
+        for meal in cuisine["servesMeals"]:
             meal_properties = self.get_entity_values(meal)
-            for food in self.get_entity_values(meal_properties["hasFood"]):
+            check_food = True
+            for food in meal_properties["hasFood"]:
                 food_properties = self.get_entity_values(food)
-                check_food = True
-                for nutrient in self.get_entity_values(food_properties["hasNutrients"]):
+                for nutrient in food_properties["hasNutrients"]:
+                    nutrient = self.ent_to_label[nutrient]
                     if nutrient in health_conditions:
                         check_food = False
-                if ("lowCO2Food" in preferences_CO2 or "lowCO2All" in preferences_CO2) and food_properties["co2Footprint"] > 50:
+                if ("lowCO2Food" in preferences_CO2 or "lowCO2All" in preferences_CO2) and food_properties["co2Footprint"][0] > 50:
                     check_food = False
-                if check_food:
-                    ok_meals.append(meal)
+            if check_food:
+                ok_meals.append(meal)
 
         return ok_meals
 
@@ -238,14 +248,12 @@ class Agent:
         neighbourhoods = self.ontology.search(type = self.label_to_class["Neighbourhood"])
 
         for restaurant in restaurants:
-            key = restaurant.keys()[0]
-            restaurant_neigbourhood = restaurant[key]["neighbourhood"]
+            key = next(iter(restaurant))
+            restaurant_neigbourhood = restaurant[key]["neighbourhood"][0]
             for neighbourhood in neighbourhoods:
-                print(f"Comparing neighbourhood: {neighbourhood} to restaurant neighbourhood: {restaurant_neigbourhood}")
-                if restaurant_neigbourhood == neighbourhood:
-                    print("Equal")
+                if self.ent_to_label[restaurant_neigbourhood] == self.ent_to_label[neighbourhood]:
                     properties_neighbourhood = self.get_entity_values(neighbourhood)
-                    city = properties_neighbourhood["belongsToCity"]
+                    city = properties_neighbourhood["belongsToCity"][0]
                     city_properties = self.get_entity_values(city)
                     option = {f"{key}": {"neighbourhood": restaurant_neigbourhood, "city": city, "location": city_properties["locatedAt"]}}
                     result.append(option)
@@ -256,21 +264,22 @@ class Agent:
     def process_preferences(self, has_preferences, preference_names):
         result = []
         for i, preference in enumerate(has_preferences):
-            if int(preference) == 1:
-                result.apppend(preference_names[i])
-            elif int(preference) == 0:
-                pass
-            else:  # Price ranges
+            try:
+                if int(preference) == 1:
+                    result.append(preference_names[i])
+                elif int(preference) == 0:
+                    pass
+            except ValueError:  # Price ranges
                 result.append(preference.lower())
         return result
 
 
-    def process_input_lists(str_list):
+    def process_input_lists(self, str_list):
         return str_list.strip("[]").replace("'", "").split(",")
 
 
     def reasoning(self, scenario_number):
-        df = pd.load("scenarios.xlsx")
+        df = pd.read_json("scenarios.json")
 
         df = df.iloc[scenario_number]
 
@@ -278,11 +287,19 @@ class Agent:
 
         # Preference preprocessing
         health_conditions = self.process_preferences([df["condition_muscle_ache"], df["condition_covid"], df["condition_gluten"], df["condition_lactose"]], ["muscleAche", "covid", "gluten", "lactose"])
-        transport_preferences = self.process_preferences(df["pref_transport_bike"], df["pref_transport_electric_car"], df["pref_transport_gas_car"], df["pref_transport_rideshare"], df["pref_transport_train"], ["bike", "electricCar", "gasolineCar", "rideShare", "train"])
+        transport_preferences = self.process_preferences([df["pref_transport_bike"], df["pref_transport_electric_car"], df["pref_transport_gas_car"], df["pref_transport_rideshare"], df["pref_transport_train"]], ["bike", "electricCar", "gasolineCar", "rideShare", "train"])
         preferred_cuisines = self.process_input_lists(df["cuisine_food_pref"])
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
         low_co2 = self.process_preferences([df["pref_co2_low_food"], df["pref_co2_low_food_and_transport"], df["pref_co2_low_transport"]], ["lowCO2Food", "lowCO2All", "lowCO2Transport"])
-        other_preferences = self.process_preferences([df["pref_transport_fast"], df["restaurant_price_range"]], ["fast"])
+        other_preferences = self.process_preferences([df["pref_transport_fast"], df["pref_transport_cheap"], df["restaurant_price_range"]], ["fast", "cheap"])
+
+        print("\n** EXTRACTED USER PREFERENCES **\n")
+        print(f"Health conditions:\n\t{health_conditions}")
+        print(f"Available transports:\n\t{transport_preferences}")
+        print(f"Preferred cuisines:\n\t{preferred_cuisines}")
+        print(f"Cuisines to avoid:\n\t{avoid_cuisines}")
+        print(f"Low CO2 requirements:\n\t{low_co2}")
+        print(f"Other preferences:\n\t{other_preferences}")
 
         # Preference matching
         restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2)
@@ -291,17 +308,18 @@ class Agent:
 
         # Options' extraction given the results
         ride_share_counter = 0
-        for restaurant, meals in restaurants.items():
-            restaurant_location = self.get_entity_values(restaurant)["establishedIn"]
-            for transport in available_transports:
+        for transport in available_transports:
+            for restaurant in restaurants:
+                key = next(iter(restaurant))
+                restaurant_location = restaurant[key]["neighbourhood"]
                 if transport == "rideShare" and ride_shares[ride_share_counter] == restaurant_location:
                     transport = "rideShare"
-                for meal in meals:
+                for meal in restaurant[key]["meals"]:
                     co2 = self.calculate_co2(transport, meal, restaurant_location)
                     utility = self.get_utility(transport, meal, restaurant_location)
 
-                    option = {"transport": transport, "restaurant": restaurant,
-                        "meal": meal, "co2": co2, "utility": utility}
+                    option = {"transport": transport, "restaurant": key,
+                        "meal": self.ent_to_label[meal], "co2": co2, "utility": utility}
 
                     options.append(option)
 
@@ -310,34 +328,48 @@ class Agent:
 
 
     def display_options(self):
-        options = json.loads("output.json")
-        output_str = ""
+        print("\n** AGENT OUTPUT **")
 
-        if not options:
-            output_str += f"The agent could not find a feasible combination of transport and food that complies with your preferences. Try to underconstraint a little bit your selection."
+        options = None
+        try:
+            with open("output.json", "r") as f:
+                options = json.load(f)
+        except json.JSONDecodeError:
+            pass
+        except IOError:
+            pass
+
+        if options is None:
+            print(f"\nThe agent could not find a feasible combination of transport and food that complies with your preferences. Try to underconstraint a little bit your selection.")
         else:
             finished = False
             counter = 0
-            get_top, more = ""
+            get_top, more = "", ""
             while not finished:
-                option = options[counter]
+                try:
+                    option = list(options)[counter]
+                except IndexError:
+                    print("\nThere is no more options to display. Thanks for using the system!")
+                    break
                 selected_option = options[option]
-                output_str += f"The selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences"
-                print(output_str + "\n")
+                print(f"\nThe selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences.")
                 if counter > 0:
-                    while get_top != "y" or more != "n":
-                        get_top = input("Do you want to see the best option again? (y/n): ")
-                        counter = 0
+                    while get_top not in ["y", "n"]:
+                        get_top = input("\nDo you want to see the best option again? (y/n): ")
                 if get_top != "y":
-                    while more != "y" or more != "n":
-                        more = input("Do you want to see the next option? (y/n): ")
-                    if more == "y":
-                        counter += 1
-                    else:
-                        finished = True
+                    while more not in ["y", "n"]:
+                        more = input("\nDo you want to see the next option? (y/n): ")
+                if get_top == "y":
+                    get_top, more = "", ""
+                    counter = 0
+                elif more == "y":
+                    get_top, more = "", ""
+                    counter += 1
+                else:
+                    print(f"\nThanks for using the system!")
+                    finished = True
+
 
 agent = Agent()
-
-# print(agent.data_dict)
 
 agent.reasoning(1)
