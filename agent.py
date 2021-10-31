@@ -65,7 +65,7 @@ class Agent:
 
 
     def get_utility(self, transport, meal, location):
-        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(meal, location)
+        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(meal, location, normalized=True)
 
 
     def get_transport_utility(self, transport):
@@ -84,13 +84,14 @@ class Agent:
     #     return ((value - old_min) * new_range) / old_range + new_min
 
 
-    def get_food_utility(self, meal, location):
+    def get_food_utility(self, meal, location, normalized=False):
         try:
             result = 0
             meal = self.get_entity_values(meal)
             for food in meal["hasFood"]:
                 result += self.check_food_co2_discount(food, location)
             # return self.change_range_value(result, 0, result, 0, 100))
+            if normalized: return result/len(meal["hasFood"])
             return result
         except KeyError:
             print("Error when processing the food utility")
