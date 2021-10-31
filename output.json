@@ -1,9 +1,44 @@
 {
+    "option2": {
+        "transport": "rideShare",
+        "restaurant": "arigatoSushiBar",
+        "meal": "tempura",
+        "co2": 102,
+        "utility": 48.16666666666667
+    },
+    "option5": {
+        "transport": "rideShare",
+        "restaurant": "oudChina",
+        "meal": "shrimpGarlic",
+        "co2": 131,
+        "utility": 56.49074074074074
+    },
+    "option6": {
+        "transport": "rideShare",
+        "restaurant": "oudChina",
+        "meal": "sichuanPork",
+        "co2": 209,
+        "utility": 61.75308641975308
+    },
     "option1": {
-        "transport": "bike",
-        "restaurant": "stormKitchen",
-        "meal": "sushiBurrito",
-        "co2": 242,
-        "utility": 165.75
+        "transport": "rideShare",
+        "restaurant": "arigatoSushiBar",
+        "meal": "sushi",
+        "co2": 229,
+        "utility": 65.58024691358025
+    },
+    "option4": {
+        "transport": "rideShare",
+        "restaurant": "oudChina",
+        "meal": "hotpot",
+        "co2": 331,
+        "utility": 70.69907407407408
+    },
+    "option3": {
+        "transport": "rideShare",
+        "restaurant": "everGreen",
+        "meal": "curryTofu",
+        "co2": 381,
+        "utility": 77.875
     }
 }

@@ -1519,6 +1519,11 @@
         <NamedIndividual IRI="#lombok"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#lunchroomTurkey"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
         <NamedIndividual IRI="#misoSoup"/>
         <NamedIndividual IRI="#carrots"/>
@@ -1577,6 +1582,11 @@
         <ObjectProperty IRI="#hasEstablishmentAt"/>
         <NamedIndividual IRI="#oudChina"/>
         <NamedIndividual IRI="#sciencePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#oudChina"/>
+        <NamedIndividual IRI="#laTaberna"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasFood"/>
@@ -1944,6 +1954,11 @@
         <NamedIndividual IRI="#zuilen"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#thaiHong"/>
+        <NamedIndividual IRI="#oudChina"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
         <NamedIndividual IRI="#tofu"/>
         <NamedIndividual IRI="#protein"/>
@@ -2037,6 +2052,11 @@
         <ObjectProperty IRI="#hasEstablishmentAt"/>
         <NamedIndividual IRI="#vilasKrishna"/>
         <NamedIndividual IRI="#innsbruckCentre"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isCheaperThan"/>
+        <NamedIndividual IRI="#vilasKrishna"/>
+        <NamedIndividual IRI="#thaiHong"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasNutrients"/>
@@ -2372,6 +2392,11 @@
         <DataProperty IRI="#cost"/>
         <NamedIndividual IRI="#rideShare"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#rideShare"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">40</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#hasTrainStation"/>

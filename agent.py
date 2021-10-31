@@ -1,3 +1,4 @@
+
 from owlready2 import *
 import os
 import json
@@ -30,6 +31,42 @@ class Agent:
         # All the data in OWL representation
         self.data_dict = {"classes": list(self.ontology.classes()), "data_properties": list(self.ontology.data_properties()), "object_properties": list(self.ontology.object_properties()), "entities": list(self.ontology.individuals())}
 
+        self.weights = { #default values
+            "MAIN_FOOD": 0.5,
+            "MAIN_TRANSPORT": 0.5,
+            "TRANSPORT_CO2": 0.6,
+            "TRANSPORT_COST": 0.3,
+            "TRANSPORT_DURATION": 0.1,
+        }
+
+    def set_weights(self,co2,other_preferences,restaurant_crowdedness): # just a crude heuristic so we can kind of estimate how much the user cares about his food versus his transport, so this is reflected in the utility function weights
+        food_points = 1
+        t_co2_points = 1
+        t_cost_points = 1
+        t_duration_points = 1
+        if co2[0] == 'lowCO2Transport': t_co2_points += 10
+        if co2[0] == 'lowCO2All':
+            t_co2_points += 10
+            food_points += 10
+        if co2[0] == 'lowCO2Food': food_points += 10
+
+        if other_preferences[0] =='fast': t_duration_points += 10
+        if other_preferences[0] =='cheap': t_cost_points += 10
+
+        if other_preferences[1] =='moderate': food_points += 15
+        if other_preferences[1] =='cheap': food_points += 10
+        if other_preferences[1] == 'expensive': food_points += 20
+
+        if restaurant_crowdedness[0] == 'low': food_points += 10
+        if restaurant_crowdedness[0] == 'high': food_points += 10
+
+        self.weights = {
+            "MAIN_FOOD": food_points/(food_points+t_co2_points+t_cost_points+t_duration_points),
+            "MAIN_TRANSPORT": (t_co2_points+t_cost_points+t_duration_points)/(food_points+t_co2_points+t_cost_points+t_duration_points),
+            "TRANSPORT_CO2": t_co2_points/(t_co2_points+t_cost_points+t_duration_points),
+            "TRANSPORT_COST": t_cost_points/(t_co2_points+t_cost_points+t_duration_points),
+            "TRANSPORT_DURATION": t_duration_points/(t_co2_points+t_cost_points+t_duration_points),
+        }
 
     def get_levenshtein_distance(self, word, possible_values):
         threshold = 3
@@ -65,13 +102,13 @@ class Agent:
 
 
     def get_utility(self, transport, meal, location):
-        return 0.5 * self.get_transport_utility(transport) + 0.5 * self.get_food_utility(meal, location, normalized=True)
+        return self.weights["MAIN_TRANSPORT"] * self.get_transport_utility(transport) + self.weights["MAIN_FOOD"] * self.get_food_utility(meal, location, normalized=True)
 
 
     def get_transport_utility(self, transport):
         properties = self.get_entity_values(transport)
         try:
-            result = 0.6 * abs(properties["co2Footprint"][0] - 100) + 0.3 * abs(properties["cost"][0] - 100) + 0.1 * abs(properties["duration"][0] - 100)
+            result = self.weights["TRANSPORT_CO2"] * abs(properties["co2Footprint"][0] - 100) + self.weights["TRANSPORT_COST"] * abs(properties["cost"][0] - 100) + self.weights["TRANSPORT_DURATION"] * abs(properties["duration"][0] - 100)
             return result
         except KeyError:
             print("Error when processing the transport utility")
@@ -138,51 +175,32 @@ class Agent:
     def get_transports(self, locations, preferences_CO2, other_preferences, available_transports, health_conditions, neighbourhood):
         # I know that this could be cleaner... It's just a quick sketch, if someone wants to change atm, go for it ;)
 
-        if "covid" in health_conditions:
-            try:
-                available_transports.remove("train")
-            except ValueError:
-                pass
+        if "covid" in health_conditions and "train" in available_transports:
+            available_transports.remove("train")
 
         if "fast" in other_preferences or "muscleAche" in health_conditions:
-            try:
+            if "walking" in available_transports:
                 available_transports.remove("walking")
-            except ValueError:
-                pass
-            try:
+            if "bike" in available_transports:
                 available_transports.remove("bike")
-            except ValueError:
-                pass
 
         if "cheap" in other_preferences:
-            try:
+            if "electricCar" in available_transports:
                 available_transports.remove("electricCar")
-            except ValueError:
-                pass
-            try:
+            if "gasolineCar" in available_transports:
                 available_transports.remove("gasolineCar")
-            except ValueError:
-                pass
-            try:
+            if "rideShare" in available_transports:
                 available_transports.remove("rideShare")
-            except ValueError:
-                pass
 
         if "moderate" in other_preferences:
-            try:
+            if "electricCar" in available_transports:
                 available_transports.remove("electricCar")
-            except ValueError:
-                pass
-            try:
+            if "gasolineCar" in available_transports:
                 available_transports.remove("gasolineCar")
-            except ValueError:
-                pass
 
         if "lowCO2Transport" in preferences_CO2 or "lowCO2All" in preferences_CO2:
-            try:
+            if "gasolineCar" in available_transports:
                 available_transports.remove("gasolineCar")
-            except ValueError:
-                pass
 
         rideShares = []
         for location in locations:
@@ -196,6 +214,16 @@ class Agent:
         result = []
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
+
+        restaurants_price_high_to_low = []
+        restaurants_sort = restaurants
+        while len(restaurants_sort) > 0: # dont judge me please, we have all sinned
+            current_restaurant = restaurants_sort[0]
+            while len(current_restaurant.isCheaperThan) > 0 and current_restaurant.isCheaperThan[0] not in restaurants_price_high_to_low:
+                current_restaurant = current_restaurant.isCheaperThan[0]
+            restaurants_price_high_to_low.append(current_restaurant)
+            if len(restaurants_price_high_to_low) == len(restaurants): break
+
 
         preferred_restaurants = []
         for restaurant in restaurants:
@@ -276,6 +304,7 @@ class Agent:
 
 
     def process_input_lists(self, str_list):
+        if isinstance(str_list, list): return str_list
         return str_list.strip("[]").replace("'", "").split(",")
 
 
@@ -293,6 +322,7 @@ class Agent:
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
         low_co2 = self.process_preferences([df["pref_co2_low_food"], df["pref_co2_low_food_and_transport"], df["pref_co2_low_transport"]], ["lowCO2Food", "lowCO2All", "lowCO2Transport"])
         other_preferences = self.process_preferences([df["pref_transport_fast"], df["pref_transport_cheap"], df["restaurant_price_range"]], ["fast", "cheap"])
+        restaurant_crowdedness = self.process_preferences([df["pref_crowdedness_none"],df["pref_crowdedness_low"],df["pref_crowdedness_high"]],["none","low","high"])
 
         print("\n** EXTRACTED USER PREFERENCES **\n")
         print(f"Health conditions:\n\t{health_conditions}")
@@ -301,6 +331,8 @@ class Agent:
         print(f"Cuisines to avoid:\n\t{avoid_cuisines}")
         print(f"Low CO2 requirements:\n\t{low_co2}")
         print(f"Other preferences:\n\t{other_preferences}")
+
+        self.set_weights(low_co2,other_preferences,restaurant_crowdedness)
 
         # Preference matching
         restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2)
@@ -313,7 +345,7 @@ class Agent:
             for restaurant in restaurants:
                 key = next(iter(restaurant))
                 restaurant_location = restaurant[key]["neighbourhood"]
-                if transport == "rideShare" and ride_shares[ride_share_counter] == restaurant_location:
+                if transport == "rideShare" and len(ride_shares) > 0 and ride_shares[ride_share_counter] == restaurant_location:
                     transport = "rideShare"
                 for meal in restaurant[key]["meals"]:
                     co2 = self.calculate_co2(transport, meal, restaurant_location)

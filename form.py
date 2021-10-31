@@ -1,21 +1,13 @@
 import PySimpleGUI as sg
 import pandas as pd
 from owlready2 import *
-
+from pandas._libs import json
 
 sg.theme('DarkTeal9')
 
-excel_file = 'scenarios.xlsx'
-df = pd.read_excel(excel_file)
-
-df.to_json("scenarios.json", indent=4)
 
 json_file = "scenarios.json"
-df2 = pd.read_json(json_file)
-
-
-# json_file = "scenarios.json"
-# df = pd.read_excel(json_file)
+df = pd.read_json(json_file)
 
 foods_to_co2_emissions = {
     "steak":100,
@@ -88,6 +80,7 @@ layout = [
 
     [sg.Text('Select any additional preferences', size=(30, 1)), sg.Radio('No CO2 preference', "RADIO2", default=True, key="pref_co2_none"),sg.Radio('Low CO2 food', "RADIO2",key="pref_co2_low_food"),sg.Radio('Low Co2 transport', "RADIO2", key="pref_co2_low_transport"),sg.Radio('Low Co2 food and transport', "RADIO2", key="pref_co2_low_food_and_transport")],
     [sg.Text('', size=(30, 1)), sg.Radio('No transport preference', "RADIO3", default=True, key="pref_transport_none"), sg.Radio('Fast transport', "RADIO3",key="pref_transport_fast"), sg.Radio('Cheap transport', "RADIO3", key="pref_transport_cheap")],
+    [sg.Text('', size=(30, 1)), sg.Radio('No crowdedness preference', "RADIO4", default=True, key="pref_crowdedness_none"), sg.Radio('Low crowdedness', "RADIO4", key="pref_crowdedness_low"),sg.Radio('High crowdedness', "RADIO4", key="pref_crowdedness_high")],
 
     [sg.Submit(), sg.Button('Clear'), sg.Exit()]
 ]
@@ -142,7 +135,7 @@ while True:
         window.Element('pref_transport_train').update(disabled=False)
 
         df = df.append(values, ignore_index=True)
-        df.to_json(excel_file, index=False)
+        df.to_json(json_file)
         sg.popup('Data saved!')
         clear_input()
 
