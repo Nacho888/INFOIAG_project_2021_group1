@@ -5,7 +5,6 @@ from pandas._libs import json
 
 sg.theme('DarkTeal9')
 
-
 json_file = "scenarios.json"
 df = pd.read_json(json_file)
 
@@ -131,7 +130,6 @@ while True:
         window.Element('select_neighbourhood').update(values=['Please select a city first'])
         window.Element('pref_co2_none').update(value=True)
         window.Element('pref_transport_none').update(value=True)
-        # window.Element('eat_out_yes').update(value=True)
         window.Element('pref_transport_train').update(disabled=False)
 
         df = df.append(values, ignore_index=True)

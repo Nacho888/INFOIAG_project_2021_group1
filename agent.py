@@ -1,4 +1,3 @@
-
 from owlready2 import *
 import os
 import json
@@ -16,8 +15,8 @@ class Agent:
             owlready2.JAVA_EXE = os.getenv('JAVA_HOME') + "/bin/java.exe"
             with self.ontology:
                 sync_reasoner(infer_property_values=True)
-        except FileNotFoundError:
-            print("Make sure that you have Java installed and defined in your environment path variables.")
+        except (FileNotFoundError, TypeError):
+            print("Make sure that you have Java installed and defined in your environment path variables (jdk folder).")
 
         # Mappings between names (str) and OWL
         self.label_to_class = {ent._name: ent for ent in self.ontology.classes()}  # "COVID": infoiag_project_2021_group1.COVID
@@ -29,9 +28,12 @@ class Agent:
         self.ent_to_label = {individual:individual._name for individual in self.ontology.individuals()}  # infoiag_project_2021_group1.bike: "bike"
 
         # All the data in OWL representation
-        self.data_dict = {"classes": list(self.ontology.classes()), "data_properties": list(self.ontology.data_properties()), "object_properties": list(self.ontology.object_properties()), "entities": list(self.ontology.individuals())}
+        self.data_dict = {"classes": list(self.ontology.classes()),
+        "data_properties": list(self.ontology.data_properties()),
+        "object_properties": list(self.ontology.object_properties()),
+        "entities": list(self.ontology.individuals())}
 
-        self.weights = { #default values
+        self.weights = { # default values
             "MAIN_FOOD": 0.5,
             "MAIN_TRANSPORT": 0.5,
             "TRANSPORT_CO2": 0.6,
@@ -39,7 +41,8 @@ class Agent:
             "TRANSPORT_DURATION": 0.1,
         }
 
-    def set_weights(self,co2,other_preferences,restaurant_crowdedness): # just a crude heuristic so we can kind of estimate how much the user cares about his food versus his transport, so this is reflected in the utility function weights
+    def set_weights(self, co2, other_preferences, restaurant_crowdedness):
+        # just a crude heuristic so we can kind of estimate how much the user cares about his food versus his transport, so this is reflected in the utility function weights
         food_points = 1
         t_co2_points = 1
         t_cost_points = 1
@@ -61,11 +64,11 @@ class Agent:
         if restaurant_crowdedness[0] == 'high': food_points += 10
 
         self.weights = {
-            "MAIN_FOOD": food_points/(food_points+t_co2_points+t_cost_points+t_duration_points),
-            "MAIN_TRANSPORT": (t_co2_points+t_cost_points+t_duration_points)/(food_points+t_co2_points+t_cost_points+t_duration_points),
-            "TRANSPORT_CO2": t_co2_points/(t_co2_points+t_cost_points+t_duration_points),
-            "TRANSPORT_COST": t_cost_points/(t_co2_points+t_cost_points+t_duration_points),
-            "TRANSPORT_DURATION": t_duration_points/(t_co2_points+t_cost_points+t_duration_points),
+            "MAIN_FOOD": food_points / (food_points + t_co2_points + t_cost_points + t_duration_points),
+            "MAIN_TRANSPORT": (t_co2_points + t_cost_points + t_duration_points) / (food_points + t_co2_points + t_cost_points + t_duration_points),
+            "TRANSPORT_CO2": t_co2_points / (t_co2_points + t_cost_points + t_duration_points),
+            "TRANSPORT_COST": t_cost_points / (t_co2_points + t_cost_points + t_duration_points),
+            "TRANSPORT_DURATION": t_duration_points / (t_co2_points + t_cost_points + t_duration_points),
         }
 
     def get_levenshtein_distance(self, word, possible_values):
@@ -101,43 +104,72 @@ class Agent:
         return {}
 
 
-    def get_utility(self, transport, meal, location):
-        return self.weights["MAIN_TRANSPORT"] * self.get_transport_utility(transport) + self.weights["MAIN_FOOD"] * self.get_food_utility(meal, location, normalized=True)
+    def get_utility(self, transport, meal, restaurant_neighbourhood, user_neighbourhood):
+        return round(abs((self.weights["MAIN_TRANSPORT"] * self.get_transport_utility(transport, restaurant_neighbourhood, user_neighbourhood) + \
+        self.weights["MAIN_FOOD"] * self.get_food_utility(meal, restaurant_neighbourhood, normalized=True)) - 100), 2)
 
 
-    def get_transport_utility(self, transport):
+    def get_transport_utility(self, transport, restaurant_neighbourhood, user_neighbourhood):
         properties = self.get_entity_values(transport)
         try:
-            result = self.weights["TRANSPORT_CO2"] * abs(properties["co2Footprint"][0] - 100) + self.weights["TRANSPORT_COST"] * abs(properties["cost"][0] - 100) + self.weights["TRANSPORT_DURATION"] * abs(properties["duration"][0] - 100)
+            result = self.weights["TRANSPORT_CO2"] * abs(properties["co2Footprint"][0] - 100) + \
+            self.weights["TRANSPORT_COST"] * abs(properties["cost"][0] - 100) + \
+            self.weights["TRANSPORT_DURATION"] * self.get_duration(restaurant_neighbourhood, user_neighbourhood)  # abs(properties["duration"][0] - 100)
             return result
         except KeyError:
             print("Error when processing the transport utility")
             return 0
 
 
-    # def change_range_value(self, value, old_min, old_max, new_min, new_max):
-    #     old_range = old_max - old_min
-    #     new_range = new_max - new_min
-    #     return ((value - old_min) * new_range) / old_range + new_min
+    def get_duration(self, restaurant_neighbourhood, user_neighbourhood):
+        duration = 0
+        cost_travel_neighbourhood = 10
+        cost_travel_city = 80
+
+        properties_restaurant_neighbourhood = self.get_entity_values(restaurant_neighbourhood[0])
+        properties_user_neighbourhood = self.get_entity_values(user_neighbourhood)
+
+        city_restaurant = self.ent_to_label[properties_restaurant_neighbourhood["belongsToCity"][0]]
+        city_user = self.ent_to_label[properties_user_neighbourhood["belongsToCity"][0]]
+
+        if city_restaurant == city_user:
+            adjacents = [self.ent_to_label[x] for x in properties_restaurant_neighbourhood["adjacentTo"]]
+            if user_neighbourhood in adjacents:
+                duration += cost_travel_neighbourhood
+            elif user_neighbourhood == restaurant_neighbourhood[0]:
+                pass
+            else:
+                while user_neighbourhood not in adjacents:
+                    duration += cost_travel_neighbourhood
+                    updated_adjacents = []
+                    for neigh in adjacents:
+                        properties_neigh = self.get_entity_values(neigh)
+                        for adj_neigh in properties_neigh["adjacentTo"]:
+                            updated_adjacents.append(adj_neigh)
+                    adjacents = [self.ent_to_label[x] for x in updated_adjacents]
+                    if len(adjacents) == 0: break
+        else:
+            duration += cost_travel_city
+
+        return duration
 
 
-    def get_food_utility(self, meal, location, normalized=False):
+    def get_food_utility(self, meal, neighbourhood, normalized=False):
         try:
             result = 0
             meal = self.get_entity_values(meal)
             for food in meal["hasFood"]:
-                result += self.check_food_co2_discount(food, location)
-            # return self.change_range_value(result, 0, result, 0, 100))
-            if normalized: return result/len(meal["hasFood"])
+                result += self.check_food_co2_discount(food, neighbourhood)
+            if normalized: return result / len(meal["hasFood"])
             return result
         except KeyError:
             print("Error when processing the food utility")
             return 0
 
 
-    def check_food_co2_discount(self, food, location):
+    def check_food_co2_discount(self, food, neighbourhood):
         properties_food = self.get_entity_values(food)
-        properties_neighbourhood = self.get_entity_values(location[0])
+        properties_neighbourhood = self.get_entity_values(neighbourhood[0])
         city = properties_neighbourhood["belongsToCity"][0]
         try:
             result = abs(properties_food["co2Footprint"][0] - 100)
@@ -154,7 +186,7 @@ class Agent:
         for i, option in enumerate(options, start=1):
             result[f"option{i}"] = {"transport": option["transport"], "restaurant": option["restaurant"],
             "meal": option["meal"], "co2": option["co2"], "utility": option["utility"]}
-        sorted_tuples = sorted(result.items(), key=lambda x: x[1]["utility"])
+        sorted_tuples = sorted(result.items(), key=lambda x: x[1]["utility"], reverse=True)
         sorted_result = {k: v for k, v in sorted_tuples}
         with open("output.json", "w") as f:
             json.dump(sorted_result, f, indent=4)
@@ -173,8 +205,6 @@ class Agent:
 
 
     def get_transports(self, locations, preferences_CO2, other_preferences, available_transports, health_conditions, neighbourhood):
-        # I know that this could be cleaner... It's just a quick sketch, if someone wants to change atm, go for it ;)
-
         if "covid" in health_conditions and "train" in available_transports:
             available_transports.remove("train")
 
@@ -210,7 +240,7 @@ class Agent:
         return available_transports, rideShares
 
 
-    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions, preferences_CO2):
+    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions, preferences_CO2, restaurant_crowdedness):
         result = []
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
@@ -224,7 +254,6 @@ class Agent:
             restaurants_price_high_to_low.append(current_restaurant)
             if len(restaurants_price_high_to_low) == len(restaurants): break
 
-
         preferred_restaurants = []
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
@@ -237,7 +266,7 @@ class Agent:
 
         for restaurant in restaurants:
             properties = self.get_entity_values(restaurant)
-            filtered = self.apply_restaurant_filters(properties, avoid_cuisines, health_conditions, preferences_CO2)
+            filtered = self.apply_restaurant_filters(properties, avoid_cuisines, health_conditions, preferences_CO2, restaurant_crowdedness)
             if len(filtered) > 0:
                 cuisine = self.get_entity_values(properties["hasCuisine"][0])
                 option = {f"{self.ent_to_label[restaurant]}": {"cuisine": cuisine, "neighbourhood": properties["hasEstablishmentAt"], "meals": filtered}}
@@ -246,10 +275,17 @@ class Agent:
         return result
 
 
-    def apply_restaurant_filters(self, restaurant, avoid_cuisines, health_conditions, preferences_CO2):
+    def apply_restaurant_filters(self, restaurant, avoid_cuisines, health_conditions, preferences_CO2, restaurant_crowdedness):
         ok_meals = []
 
         cuisine = self.get_entity_values(restaurant["hasCuisine"][0])
+        crowdedness = self.get_entity_values(restaurant["hasCrowdedness"][0])
+
+        if restaurant_crowdedness != "none":
+            if restaurant_crowdedness == "low" and crowdedness == "highCrowdedness":
+                return ok_meals
+            elif restaurant_crowdedness == "high" and crowdedness == "lowCrowdedness":
+                return ok_meals
 
         if cuisine in avoid_cuisines:
             return ok_meals
@@ -322,7 +358,7 @@ class Agent:
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
         low_co2 = self.process_preferences([df["pref_co2_low_food"], df["pref_co2_low_food_and_transport"], df["pref_co2_low_transport"]], ["lowCO2Food", "lowCO2All", "lowCO2Transport"])
         other_preferences = self.process_preferences([df["pref_transport_fast"], df["pref_transport_cheap"], df["restaurant_price_range"]], ["fast", "cheap"])
-        restaurant_crowdedness = self.process_preferences([df["pref_crowdedness_none"],df["pref_crowdedness_low"],df["pref_crowdedness_high"]],["none","low","high"])
+        restaurant_crowdedness = self.process_preferences([df["pref_crowdedness_none"], df["pref_crowdedness_low"], df["pref_crowdedness_high"]], ["none", "low", "high"])
 
         print("\n** EXTRACTED USER PREFERENCES **\n")
         print(f"Health conditions:\n\t{health_conditions}")
@@ -330,12 +366,13 @@ class Agent:
         print(f"Preferred cuisines:\n\t{preferred_cuisines}")
         print(f"Cuisines to avoid:\n\t{avoid_cuisines}")
         print(f"Low CO2 requirements:\n\t{low_co2}")
+        print(f"Crowdedness preferences:\n\t{restaurant_crowdedness}")
         print(f"Other preferences:\n\t{other_preferences}")
 
         self.set_weights(low_co2,other_preferences,restaurant_crowdedness)
 
         # Preference matching
-        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2)
+        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2, restaurant_crowdedness)
         locations = self.get_restaurants_location(restaurants)
         available_transports, ride_shares = self.get_transports(locations, low_co2, other_preferences, transport_preferences, health_conditions, df["select_neighbourhood"])
 
@@ -344,12 +381,12 @@ class Agent:
         for transport in available_transports:
             for restaurant in restaurants:
                 key = next(iter(restaurant))
-                restaurant_location = restaurant[key]["neighbourhood"]
-                if transport == "rideShare" and len(ride_shares) > 0 and ride_shares[ride_share_counter] == restaurant_location:
+                restaurant_neighbourhood = restaurant[key]["neighbourhood"]
+                if transport == "rideShare" and len(ride_shares) > 0 and ride_shares[ride_share_counter] == restaurant_neighbourhood:
                     transport = "rideShare"
                 for meal in restaurant[key]["meals"]:
-                    co2 = self.calculate_co2(transport, meal, restaurant_location)
-                    utility = self.get_utility(transport, meal, restaurant_location)
+                    co2 = self.calculate_co2(transport, meal, restaurant_neighbourhood)
+                    utility = self.get_utility(transport, meal, restaurant_neighbourhood, df["select_neighbourhood"])
 
                     option = {"transport": transport, "restaurant": key,
                         "meal": self.ent_to_label[meal], "co2": co2, "utility": utility}
