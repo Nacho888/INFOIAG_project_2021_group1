@@ -1,3 +1,5 @@
+import math
+
 from owlready2 import *
 import os
 import json
@@ -40,6 +42,7 @@ class Agent:
             "TRANSPORT_COST": 0.3,
             "TRANSPORT_DURATION": 0.1,
         }
+        self.restaurants_cheap = []
 
     def set_weights(self, co2, other_preferences, restaurant_crowdedness):
         # just a crude heuristic so we can kind of estimate how much the user cares about his food versus his transport, so this is reflected in the utility function weights
@@ -56,9 +59,9 @@ class Agent:
         if other_preferences[0] =='fast': t_duration_points += 10
         if other_preferences[0] =='cheap': t_cost_points += 10
 
-        if other_preferences[1] =='moderate': food_points += 15
-        if other_preferences[1] =='cheap': food_points += 10
-        if other_preferences[1] == 'expensive': food_points += 20
+        if other_preferences[1] =='moderate': food_points += 10
+        if other_preferences[1] =='cheap': food_points += 1
+        if other_preferences[1] == 'expensive': food_points += 15
 
         if restaurant_crowdedness[0] == 'low': food_points += 10
         if restaurant_crowdedness[0] == 'high': food_points += 10
@@ -240,19 +243,26 @@ class Agent:
         return available_transports, rideShares
 
 
-    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions, preferences_CO2, restaurant_crowdedness):
+    def get_restaurants(self, preferred_cuisines, avoid_cuisines, health_conditions, preferences_CO2, restaurant_crowdedness, other_preferences):
         result = []
 
         restaurants = self.ontology.search(type = self.label_to_class["Restaurant"])
 
         restaurants_price_high_to_low = []
         restaurants_sort = restaurants
-        while len(restaurants_sort) > 0: # dont judge me please, we have all sinned
-            current_restaurant = restaurants_sort[0]
+        counter = 0
+        while True: # dont judge me please, we have all sinned
+            current_restaurant = restaurants_sort[counter]
             while len(current_restaurant.isCheaperThan) > 0 and current_restaurant.isCheaperThan[0] not in restaurants_price_high_to_low:
                 current_restaurant = current_restaurant.isCheaperThan[0]
-            restaurants_price_high_to_low.append(current_restaurant)
+
+            if current_restaurant not in restaurants_price_high_to_low:
+                restaurants_price_high_to_low.append(current_restaurant)
+            counter += 1
+            counter = counter % len(restaurants_sort)
             if len(restaurants_price_high_to_low) == len(restaurants): break
+        restaurants_price_high_to_low.reverse()
+        self.restaurants_cheap = restaurants_price_high_to_low
 
         preferred_restaurants = []
         for restaurant in restaurants:
@@ -372,7 +382,7 @@ class Agent:
         self.set_weights(low_co2,other_preferences,restaurant_crowdedness)
 
         # Preference matching
-        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2, restaurant_crowdedness)
+        restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2, restaurant_crowdedness, other_preferences)
         locations = self.get_restaurants_location(restaurants)
         available_transports, ride_shares = self.get_transports(locations, low_co2, other_preferences, transport_preferences, health_conditions, df["select_neighbourhood"])
 
@@ -415,6 +425,25 @@ class Agent:
             finished = False
             counter = 0
             get_top, more = "", ""
+            restaurant_names = []
+            available_restaurants = []
+            cheap_dict = {}
+
+            for restaurant in self.restaurants_cheap:
+                restaurant_names.append(restaurant.name)
+
+            for entry in options:
+                if options[entry]["restaurant"] not in available_restaurants:
+                    available_restaurants.append(options[entry]["restaurant"])
+
+            for available_restaurant in available_restaurants:
+                cheap_arr = self.restaurants_cheap[:restaurant_names.index(available_restaurant)]
+                cheap_dict[available_restaurant] = []
+                cheap_arr.reverse()
+                for entry_restaurant in cheap_arr:
+                    if entry_restaurant.name in available_restaurants:
+                        cheap_dict[available_restaurant].append(entry_restaurant.name)
+
             while not finished:
                 try:
                     option = list(options)[counter]
@@ -423,18 +452,33 @@ class Agent:
                     break
                 selected_option = options[option]
                 print(f"\nThe selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences.")
-                if counter > 0:
-                    while get_top not in ["y", "n"]:
-                        get_top = input("\nDo you want to see the best option again? (y/n): ")
-                if get_top != "y":
-                    while more not in ["y", "n"]:
-                        more = input("\nDo you want to see the next option? (y/n): ")
-                if get_top == "y":
-                    get_top, more = "", ""
-                    counter = 0
-                elif more == "y":
+                #if counter > 0:
+                #    while get_top not in ["y", "n"]:
+                #        get_top = input("\nDo you want to see the option with the best utility again? (y/n): ")
+                #if get_top != "y":
+                while more not in ["y", "n","c"]:
+                    more = input("\nDo you want to see the next best option or do you want something cheaper? (y/n/c): ")
+                if more == "y":
                     get_top, more = "", ""
                     counter += 1
+                elif more == "c":
+                    get_top, more = "", ""
+                    selected_name = selected_option['restaurant']
+                    cheaper_arr = cheap_dict[selected_name]
+                    while len(cheaper_arr) > 0:
+                        alternative = cheaper_arr.pop()
+                        alt_option = False
+                        for entry in options:
+                            if options[entry]["restaurant"] == alternative:
+                                alt_option = options[entry]
+                        if alt_option:
+                            print(f"\nThe cheaper alternative is {alt_option['restaurant']} where you can eat {alt_option['meal']}. You will get there by {alt_option['transport']}. This option has a total CO2 consumption of {alt_option['co2']} and an utility of {alt_option['utility']} calculated by the agent and respecting all of your preferences.")
+                            more_alt = input("\nDo you want to try to find a cheaper option? (y/n)")
+                            if more_alt == "n": break
+
+                    print("\nNo cheaper restaurants found")
+
+
                 else:
                     print(f"\nThanks for using the system!")
                     finished = True
