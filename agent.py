@@ -465,6 +465,7 @@ class Agent:
                     get_top, more = "", ""
                     selected_name = selected_option['restaurant']
                     cheaper_arr = cheap_dict[selected_name]
+                    cheaper_arr.reverse()
                     while len(cheaper_arr) > 0:
                         alternative = cheaper_arr.pop()
                         alt_option = False
