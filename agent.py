@@ -60,15 +60,15 @@ class Agent:
             pass
 
         if len(other_preferences) > 0:
-            if other_preferences[0] =='fast': t_duration_points += 10
-            if other_preferences[0] =='cheap': t_cost_points += 10
+            if other_preferences[0] =='trans_fast': t_duration_points += 10
+            if other_preferences[0] =='trans_cheap': t_cost_points += 10
         else:
             pass
 
         if len(other_preferences) > 1:
-            if other_preferences[1] =='moderate': food_points += 10
-            if other_preferences[1] =='cheap': food_points += 1
-            if other_preferences[1] == 'expensive': food_points += 15
+            if other_preferences[1] =='rest_moderate': food_points += 10
+            if other_preferences[1] =='rest_cheap': food_points += 1
+            if other_preferences[1] == 'rest_expensive': food_points += 15
         else:
             pass
 
@@ -229,7 +229,7 @@ class Agent:
             if "bike" in available_transports:
                 available_transports.remove("bike")
 
-        if "cheap" in other_preferences:
+        if "trans_cheap" in other_preferences:
             if "electricCar" in available_transports:
                 available_transports.remove("electricCar")
             if "gasolineCar" in available_transports:
@@ -357,7 +357,7 @@ class Agent:
                 elif int(preference) == 0:
                     pass
             except ValueError:  # Price ranges
-                result.append(preference.lower())
+                result.append(f"rest_{preference.lower()}")
         return result
 
 
@@ -379,7 +379,7 @@ class Agent:
         preferred_cuisines = self.process_input_lists(df["cuisine_food_pref"])
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
         low_co2 = self.process_preferences([df["pref_co2_low_food"], df["pref_co2_low_food_and_transport"], df["pref_co2_low_transport"]], ["lowCO2Food", "lowCO2All", "lowCO2Transport"])
-        other_preferences = self.process_preferences([df["pref_transport_fast"], df["pref_transport_cheap"], df["restaurant_price_range"]], ["fast", "cheap"])
+        other_preferences = self.process_preferences([df["pref_transport_fast"], df["pref_transport_cheap"], df["restaurant_price_range"]], ["trans_fast", "trans_cheap"])
         restaurant_crowdedness = self.process_preferences([df["pref_crowdedness_none"], df["pref_crowdedness_low"], df["pref_crowdedness_high"]], ["none", "low", "high"])
 
         print("\n** EXTRACTED USER PREFERENCES **\n")
@@ -391,7 +391,7 @@ class Agent:
         print(f"Crowdedness preferences:\n\t{restaurant_crowdedness}")
         print(f"Other preferences:\n\t{other_preferences}")
 
-        self.set_weights(low_co2,other_preferences,restaurant_crowdedness)
+        self.set_weights(low_co2, other_preferences, restaurant_crowdedness)
 
         # Preference matching
         restaurants = self.get_restaurants(preferred_cuisines, avoid_cuisines, health_conditions, low_co2, restaurant_crowdedness, other_preferences)
@@ -436,7 +436,7 @@ class Agent:
         else:
             finished = False
             counter = 0
-            get_top, more = "", ""
+            more = ""
             restaurant_names = []
             available_restaurants = []
             cheap_dict = {}
@@ -464,17 +464,13 @@ class Agent:
                     break
                 selected_option = options[option]
                 print(f"\nThe selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences.")
-                #if counter > 0:
-                #    while get_top not in ["y", "n"]:
-                #        get_top = input("\nDo you want to see the option with the best utility again? (y/n): ")
-                #if get_top != "y":
-                while more not in ["y", "n","c"]:
-                    more = input("\nDo you want to see the next best option or do you want something cheaper? (y/n/c): ")
+                while more not in ["y", "n", "c"]:
+                    more = input("\nDo you want to see the next best option by utility (y/n) or do you want something cheaper (c)? (y/n/c): ")
                 if more == "y":
-                    get_top, more = "", ""
+                    more = ""
                     counter += 1
                 elif more == "c":
-                    get_top, more = "", ""
+                    more = ""
                     selected_name = selected_option['restaurant']
                     cheaper_arr = cheap_dict[selected_name]
                     cheaper_arr.reverse()
@@ -486,10 +482,10 @@ class Agent:
                                 alt_option = options[entry]
                         if alt_option:
                             print(f"\nThe cheaper alternative is {alt_option['restaurant']} where you can eat {alt_option['meal']}. You will get there by {alt_option['transport']}. This option has a total CO2 consumption of {alt_option['co2']} and an utility of {alt_option['utility']} calculated by the agent and respecting all of your preferences.")
-                            more_alt = input("\nDo you want to try to find a cheaper option? (y/n)")
+                            more_alt = input("\nDo you want to try to find a cheaper option? (y/n): ")
                             if more_alt == "n": break
 
-                    print("\nNo cheaper restaurants found")
+                    print("\nNo cheaper restaurants found. Returning to the option with the highest utility...")
 
 
                 else:
@@ -499,4 +495,4 @@ class Agent:
 
 agent = Agent()
 
-agent.reasoning(2)
+agent.reasoning(3)

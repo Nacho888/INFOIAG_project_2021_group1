@@ -1,12 +1,20 @@
 import PySimpleGUI as sg
 import pandas as pd
 from owlready2 import *
-from pandas._libs import json
+import json
 
 sg.theme('DarkTeal9')
 
+base_dict = {"condition_covid":{},"condition_gluten":{},"condition_lactose":{},"condition_muscle_ache":{},"cuisine_food_avoid":{},"cuisine_food_pref":{},"pref_co2_low_food":{},"pref_co2_low_food_and_transport":{},"pref_co2_low_transport":{},"pref_co2_none":{},"pref_crowdedness_high":{},"pref_crowdedness_low":{},"pref_crowdedness_none":{},"pref_transport_bike":{},"pref_transport_cheap":{},"pref_transport_electric_car":{},"pref_transport_fast":{},"pref_transport_gas_car":{},"pref_transport_none":{},"pref_transport_rideshare":{},"pref_transport_train":{},"pref_transport_walk":{},"restaurant_price_range":{},"select_cities":{},"select_neighbourhood":{}}
+
 json_file = "scenarios.json"
-df = pd.read_json(json_file)
+try:
+    df = pd.read_json(json_file)
+except ValueError:
+    with open(json_file, "w") as f:
+        json.dump(base_dict, f)
+    df = pd.read_json(json_file)
+
 
 foods_to_co2_emissions = {
     "steak":100,
