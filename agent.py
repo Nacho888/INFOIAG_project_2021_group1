@@ -50,21 +50,33 @@ class Agent:
         t_co2_points = 1
         t_cost_points = 1
         t_duration_points = 1
-        if co2[0] == 'lowCO2Transport': t_co2_points += 10
-        if co2[0] == 'lowCO2All':
-            t_co2_points += 10
-            food_points += 10
-        if co2[0] == 'lowCO2Food': food_points += 10
+        if len(co2) > 0:
+            if co2[0] == 'lowCO2Transport': t_co2_points += 10
+            if co2[0] == 'lowCO2All':
+                t_co2_points += 10
+                food_points += 10
+            if co2[0] == 'lowCO2Food': food_points += 10
+        else:
+            pass
 
-        if other_preferences[0] =='fast': t_duration_points += 10
-        if other_preferences[0] =='cheap': t_cost_points += 10
+        if len(other_preferences) > 0:
+            if other_preferences[0] =='fast': t_duration_points += 10
+            if other_preferences[0] =='cheap': t_cost_points += 10
+        else:
+            pass
 
-        if other_preferences[1] =='moderate': food_points += 10
-        if other_preferences[1] =='cheap': food_points += 1
-        if other_preferences[1] == 'expensive': food_points += 15
+        if len(other_preferences) > 1:
+            if other_preferences[1] =='moderate': food_points += 10
+            if other_preferences[1] =='cheap': food_points += 1
+            if other_preferences[1] == 'expensive': food_points += 15
+        else:
+            pass
 
-        if restaurant_crowdedness[0] == 'low': food_points += 10
-        if restaurant_crowdedness[0] == 'high': food_points += 10
+        if len(restaurant_crowdedness) > 0:
+            if restaurant_crowdedness[0] == 'low': food_points += 10
+            if restaurant_crowdedness[0] == 'high': food_points += 10
+        else:
+            pass
 
         self.weights = {
             "MAIN_FOOD": food_points / (food_points + t_co2_points + t_cost_points + t_duration_points),
@@ -363,7 +375,7 @@ class Agent:
 
         # Preference preprocessing
         health_conditions = self.process_preferences([df["condition_muscle_ache"], df["condition_covid"], df["condition_gluten"], df["condition_lactose"]], ["muscleAche", "covid", "gluten", "lactose"])
-        transport_preferences = self.process_preferences([df["pref_transport_bike"], df["pref_transport_electric_car"], df["pref_transport_gas_car"], df["pref_transport_rideshare"], df["pref_transport_train"]], ["bike", "electricCar", "gasolineCar", "rideShare", "train"])
+        transport_preferences = self.process_preferences([df["pref_transport_bike"], df["pref_transport_electric_car"], df["pref_transport_gas_car"], df["pref_transport_rideshare"], df["pref_transport_train"], df["pref_transport_walk"]], ["bike", "electricCar", "gasolineCar", "rideShare", "train", "walking"])
         preferred_cuisines = self.process_input_lists(df["cuisine_food_pref"])
         avoid_cuisines = self.process_input_lists(df["cuisine_food_avoid"])
         low_co2 = self.process_preferences([df["pref_co2_low_food"], df["pref_co2_low_food_and_transport"], df["pref_co2_low_transport"]], ["lowCO2Food", "lowCO2All", "lowCO2Transport"])
@@ -419,7 +431,7 @@ class Agent:
         except IOError:
             pass
 
-        if options is None:
+        if len(options) == 0:
             print(f"\nThe agent could not find a feasible combination of transport and food that complies with your preferences. Try to underconstraint a little bit your selection.")
         else:
             finished = False
@@ -487,4 +499,4 @@ class Agent:
 
 agent = Agent()
 
-agent.reasoning(1)
+agent.reasoning(2)

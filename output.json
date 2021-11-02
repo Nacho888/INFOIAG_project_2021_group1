@@ -1,44 +1,23 @@
 {
-    "option2": {
-        "transport": "rideShare",
-        "restaurant": "arigatoSushiBar",
-        "meal": "tempura",
-        "co2": 102,
-        "utility": 61.82
+    "option3": {
+        "transport": "walking",
+        "restaurant": "laTaberna",
+        "meal": "spanishOmelette",
+        "co2": 143,
+        "utility": 29.63
     },
     "option1": {
-        "transport": "rideShare",
-        "restaurant": "arigatoSushiBar",
-        "meal": "sushi",
-        "co2": 229,
-        "utility": 45.72
+        "transport": "walking",
+        "restaurant": "casaDiAlfredo",
+        "meal": "pastaCarbonara",
+        "co2": 143,
+        "utility": 18.08
     },
-    "option5": {
-        "transport": "rideShare",
-        "restaurant": "oudChina",
-        "meal": "shrimpGarlic",
-        "co2": 131,
-        "utility": 38.41
-    },
-    "option3": {
-        "transport": "rideShare",
-        "restaurant": "everGreen",
-        "meal": "curryTofu",
-        "co2": 381,
-        "utility": 34.36
-    },
-    "option6": {
-        "transport": "rideShare",
-        "restaurant": "oudChina",
-        "meal": "sichuanPork",
-        "co2": 209,
-        "utility": 33.54
-    },
-    "option4": {
-        "transport": "rideShare",
-        "restaurant": "oudChina",
-        "meal": "hotpot",
-        "co2": 331,
-        "utility": 25.28
+    "option2": {
+        "transport": "walking",
+        "restaurant": "casaDiAlfredo",
+        "meal": "pizza",
+        "co2": 143,
+        "utility": 18.08
     }
 }
