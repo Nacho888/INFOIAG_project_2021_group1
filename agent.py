@@ -120,8 +120,8 @@ class Agent:
 
 
     def get_utility(self, transport, meal, restaurant_neighbourhood, user_neighbourhood):
-        return round(abs((self.weights["MAIN_TRANSPORT"] * self.get_transport_utility(transport, restaurant_neighbourhood, user_neighbourhood) + \
-        self.weights["MAIN_FOOD"] * self.get_food_utility(meal, restaurant_neighbourhood, normalized=True)))/100, 2)
+        return round((self.weights["MAIN_TRANSPORT"] * self.get_transport_utility(transport, restaurant_neighbourhood, user_neighbourhood) + \
+        self.weights["MAIN_FOOD"] * self.get_food_utility(meal, restaurant_neighbourhood, normalized=True))/100, 2)
 
 
     def get_transport_utility(self, transport, restaurant_neighbourhood, user_neighbourhood):
