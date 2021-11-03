@@ -1,114 +1,44 @@
 {
-    "option1": {
-        "transport": "electricCar",
-        "restaurant": "arigatoSushiBar",
-        "meal": "misoSoup",
-        "co2": 358,
-        "utility": 0.54
+    "option6": {
+        "transport": "walking",
+        "restaurant": "thaiHong",
+        "meal": "curryTofu",
+        "co2": 351,
+        "utility": 0.94
     },
-    "option3": {
-        "transport": "electricCar",
-        "restaurant": "arigatoSushiBar",
-        "meal": "sushi",
-        "co2": 249,
-        "utility": 0.52
-    },
-    "option15": {
-        "transport": "electricCar",
-        "restaurant": "vilasKrishna",
-        "meal": "fishCurry",
-        "co2": 186,
-        "utility": 0.52
-    },
-    "option2": {
-        "transport": "electricCar",
-        "restaurant": "arigatoSushiBar",
-        "meal": "ramen",
-        "co2": 350,
-        "utility": 0.5
-    },
-    "option14": {
-        "transport": "electricCar",
-        "restaurant": "vilasKrishna",
-        "meal": "butterChicken",
-        "co2": 136,
-        "utility": 0.46
+    "option5": {
+        "transport": "walking",
+        "restaurant": "laTaberna",
+        "meal": "spanishOmelette",
+        "co2": 143,
+        "utility": 0.86
     },
     "option4": {
-        "transport": "electricCar",
-        "restaurant": "arigatoSushiBar",
-        "meal": "tempura",
-        "co2": 122,
-        "utility": 0.44
+        "transport": "rideShare",
+        "restaurant": "thaiHong",
+        "meal": "curryTofu",
+        "co2": 381,
+        "utility": 0.78
     },
-    "option16": {
-        "transport": "electricCar",
-        "restaurant": "vilasKrishna",
-        "meal": "palakPaneer",
-        "co2": 128,
-        "utility": 0.41
+    "option3": {
+        "transport": "rideShare",
+        "restaurant": "laTaberna",
+        "meal": "spanishOmelette",
+        "co2": 173,
+        "utility": 0.7
     },
-    "option10": {
+    "option2": {
         "transport": "electricCar",
         "restaurant": "thaiHong",
         "meal": "curryTofu",
         "co2": 401,
-        "utility": 0.39
+        "utility": 0.67
     },
-    "option6": {
+    "option1": {
         "transport": "electricCar",
-        "restaurant": "oudChina",
-        "meal": "misoSoup",
-        "co2": 358,
-        "utility": 0.37
-    },
-    "option5": {
-        "transport": "electricCar",
-        "restaurant": "oudChina",
-        "meal": "hotpot",
-        "co2": 351,
-        "utility": 0.36
-    },
-    "option7": {
-        "transport": "electricCar",
-        "restaurant": "oudChina",
-        "meal": "ramen",
-        "co2": 350,
-        "utility": 0.33
-    },
-    "option9": {
-        "transport": "electricCar",
-        "restaurant": "oudChina",
-        "meal": "sichuanPork",
-        "co2": 229,
-        "utility": 0.32
-    },
-    "option12": {
-        "transport": "electricCar",
-        "restaurant": "thaiHong",
-        "meal": "khaoSoi",
-        "co2": 272,
-        "utility": 0.31
-    },
-    "option8": {
-        "transport": "electricCar",
-        "restaurant": "oudChina",
-        "meal": "shrimpGarlic",
-        "co2": 151,
-        "utility": 0.3
-    },
-    "option11": {
-        "transport": "electricCar",
-        "restaurant": "thaiHong",
-        "meal": "kaoKaMoo",
-        "co2": 186,
-        "utility": 0.29
-    },
-    "option13": {
-        "transport": "electricCar",
-        "restaurant": "thaiHong",
-        "meal": "padKraPrao",
-        "co2": 136,
-        "utility": 0.28
+        "restaurant": "laTaberna",
+        "meal": "spanishOmelette",
+        "co2": 193,
+        "utility": 0.59
     }
 }

@@ -484,15 +484,7 @@ class Agent:
                             print(f"\nThe cheaper alternative is {alt_option['restaurant']} where you can eat {alt_option['meal']}. You will get there by {alt_option['transport']}. This option has a total CO2 consumption of {alt_option['co2']} and an utility of {alt_option['utility']} calculated by the agent and respecting all of your preferences.")
                             more_alt = input("\nDo you want to try to find a cheaper option? (y/n): ")
                             if more_alt == "n": break
-
                     print("\nNo cheaper restaurants found. Returning to the option with the highest utility...")
-
-
                 else:
                     print(f"\nThanks for using the system!")
                     finished = True
-
-
-agent = Agent()
-
-agent.reasoning(1)

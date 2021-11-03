@@ -7,15 +7,6 @@ sg.theme('DarkTeal9')
 
 base_dict = {"condition_covid":{},"condition_gluten":{},"condition_lactose":{},"condition_muscle_ache":{},"cuisine_food_avoid":{},"cuisine_food_pref":{},"pref_co2_low_food":{},"pref_co2_low_food_and_transport":{},"pref_co2_low_transport":{},"pref_co2_none":{},"pref_crowdedness_high":{},"pref_crowdedness_low":{},"pref_crowdedness_none":{},"pref_transport_bike":{},"pref_transport_cheap":{},"pref_transport_electric_car":{},"pref_transport_fast":{},"pref_transport_gas_car":{},"pref_transport_none":{},"pref_transport_rideshare":{},"pref_transport_train":{},"pref_transport_walk":{},"restaurant_price_range":{},"select_cities":{},"select_neighbourhood":{}}
 
-json_file = "scenarios.json"
-try:
-    df = pd.read_json(json_file)
-except ValueError:
-    with open(json_file, "w") as f:
-        json.dump(base_dict, f)
-    df = pd.read_json(json_file)
-
-
 foods_to_co2_emissions = {
     "steak":100,
     "beef":100,
@@ -94,55 +85,70 @@ layout = [
 
 window = sg.Window('Simple data entry form', layout)
 
-def clear_input():
-    for key in values:
-        window[key]('')
-    return None
+def execute_form():
+    added_index = None
 
-while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Exit':
-        break
-    if event == 'Clear':
-        clear_input()
-    if event == 'select_cities':
-        city_name = values['select_cities']
-        available_values = city_to_neighbourhoods[city_name]
-        window.Element('select_neighbourhood').update(values=available_values)
-    if event == 'select_neighbourhood':
-        neighbourhood = values['select_neighbourhood']
-        window.Element('pref_transport_train').update(disabled=False)
-        if neighbourhood not in neighbourhoods_with_train_station:
-            window.Element('pref_transport_train').update(value=False,disabled=True)
+    json_file = "scenarios.json"
+    try:
+        df = pd.read_json(json_file)
+    except ValueError:
+        with open(json_file, "w") as f:
+            json.dump(base_dict, f)
+        df = pd.read_json(json_file)
 
-    if event == 'cuisine_food_pref' or event == 'cuisine_food_avoid':
-        if event == 'cuisine_food_pref': target = 'cuisine_food_avoid'
-        if event == 'cuisine_food_avoid': target = 'cuisine_food_pref'
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Exit':
+            break
+        if event == 'Clear':
+            for key in values:
+                window[key]('')
+        if event == 'select_cities':
+            city_name = values['select_cities']
+            available_values = city_to_neighbourhoods[city_name]
+            window.Element('select_neighbourhood').update(values=available_values)
+        if event == 'select_neighbourhood':
+            neighbourhood = values['select_neighbourhood']
+            window.Element('pref_transport_train').update(disabled=False)
+            if neighbourhood not in neighbourhoods_with_train_station:
+                window.Element('pref_transport_train').update(value=False,disabled=True)
 
-        selected = values[event]
-        allowed = []
-        index_list = []
-        for cuisine in meals_list:
-            if cuisine not in selected:
-                allowed.append(cuisine)
-        for index, cuisine in enumerate(allowed):
-            if cuisine in values[target]:
-                index_list.append(index)
-        window.Element(target).update(values=allowed,set_to_index=index_list)
+        if event == 'cuisine_food_pref' or event == 'cuisine_food_avoid':
+            if event == 'cuisine_food_pref': target = 'cuisine_food_avoid'
+            if event == 'cuisine_food_avoid': target = 'cuisine_food_pref'
 
-    if event == 'Submit':
-        if values['select_neighbourhood'] == 'Please select a city first':
-            sg.popup_ok('Please select a city from the dropdown menu and a valid neighbourhood')
-            continue
+            selected = values[event]
+            allowed = []
+            index_list = []
+            for cuisine in meals_list:
+                if cuisine not in selected:
+                    allowed.append(cuisine)
+            for index, cuisine in enumerate(allowed):
+                if cuisine in values[target]:
+                    index_list.append(index)
+            window.Element(target).update(values=allowed,set_to_index=index_list)
 
-        window.Element('select_neighbourhood').update(values=['Please select a city first'])
-        window.Element('pref_co2_none').update(value=True)
-        window.Element('pref_transport_none').update(value=True)
-        window.Element('pref_transport_train').update(disabled=False)
+        if event == 'Submit':
+            if values['select_neighbourhood'] == 'Please select a city first':
+                sg.popup_ok('Please select a city from the dropdown menu and a valid neighbourhood')
+                continue
 
-        df = df.append(values, ignore_index=True)
-        df.to_json(json_file)
-        sg.popup('Data saved!')
-        clear_input()
+            window.Element('select_neighbourhood').update(values=['Please select a city first'])
+            window.Element('pref_co2_none').update(value=True)
+            window.Element('pref_transport_none').update(value=True)
+            window.Element('pref_transport_train').update(disabled=False)
 
-window.close()
+            for key, val in values.items():
+                values[key] = 1 if val == True else 0 if val == False else val
+
+            df = df.append(values, ignore_index=True)
+
+            added_index = df.tail(1).index.start
+
+            df.to_json(json_file)
+            sg.popup('Data saved!')
+            window.close()
+
+    window.close()
+
+    return added_index if added_index is not None else None
