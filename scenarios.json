@@ -1,1 +1,152 @@
-{"condition_covid":{"0":0,"1":0,"2":0,"3":0},"condition_gluten":{"0":0,"1":0,"2":0,"3":0},"condition_lactose":{"0":1,"1":0,"2":0,"3":0},"condition_muscle_ache":{"0":0,"1":0,"2":0,"3":0},"cuisine_food_avoid":{"0":[],"1":[],"2":[],"3":[]},"cuisine_food_pref":{"0":["japanese"],"1":["chinese","indian","japanese","thai"],"2":["italian","spanish"],"3":["vegan"]},"pref_co2_low_food":{"0":0,"1":0,"2":0,"3":0},"pref_co2_low_food_and_transport":{"0":0,"1":0,"2":0,"3":0},"pref_co2_low_transport":{"0":1,"1":0,"2":0,"3":0},"pref_co2_none":{"0":0,"1":1,"2":1,"3":1},"pref_crowdedness_high":{"0":0,"1":0,"2":0,"3":0},"pref_crowdedness_low":{"0":0,"1":0,"2":0,"3":1},"pref_crowdedness_none":{"0":1,"1":1,"2":1,"3":0},"pref_transport_bike":{"0":1,"1":0,"2":0,"3":0},"pref_transport_cheap":{"0":1,"1":0,"2":0,"3":0},"pref_transport_electric_car":{"0":0,"1":1,"2":0,"3":0},"pref_transport_fast":{"0":0,"1":0,"2":0,"3":0},"pref_transport_gas_car":{"0":0,"1":0,"2":0,"3":0},"pref_transport_none":{"0":0,"1":1,"2":1,"3":1},"pref_transport_rideshare":{"0":1,"1":0,"2":0,"3":0},"pref_transport_train":{"0":1,"1":0,"2":0,"3":0},"pref_transport_walk":{"0":1,"1":0,"2":1,"3":1},"restaurant_price_range":{"0":"Cheap","1":"Cheap","2":"Cheap","3":"Expensive"},"select_cities":{"0":"amsterdam","1":"utrecht","2":"texel","3":"innsbruck"},"select_neighbourhood":{"0":"amsterdamCentre","1":"lombok","2":"deKoog","3":"saggen"}}
+{
+    "condition_covid": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "condition_gluten": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "condition_lactose": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "condition_muscle_ache": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "cuisine_food_avoid": {
+        "0": [],
+        "1": [],
+        "2": [],
+        "3": []
+    },
+    "cuisine_food_pref": {
+        "0": ["japanese"],
+        "1": ["chinese", "indian", "japanese", "thai"],
+        "2": ["italian", "spanish"],
+        "3": ["vegan"]
+    },
+    "pref_co2_low_food": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_co2_low_food_and_transport": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_co2_low_transport": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_co2_none": {
+        "0": 0,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "pref_crowdedness_high": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_crowdedness_low": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 1
+    },
+    "pref_crowdedness_none": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 0
+    },
+    "pref_transport_bike": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_cheap": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_electric_car": {
+        "0": 0,
+        "1": 1,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_fast": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_gas_car": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_none": {
+        "0": 0,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "pref_transport_rideshare": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_train": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+    },
+    "pref_transport_walk": {
+        "0": 1,
+        "1": 0,
+        "2": 1,
+        "3": 1
+    },
+    "restaurant_price_range": {
+        "0": "Moderate",
+        "1": "Cheap",
+        "2": "Cheap",
+        "3": "Expensive"
+    },
+    "select_cities": {
+        "0": "amsterdam",
+        "1": "utrecht",
+        "2": "texel",
+        "3": "innsbruck"
+    },
+    "select_neighbourhood": {
+        "0": "amsterdamCentre",
+        "1": "lombok",
+        "2": "deKoog",
+        "3": "saggen"
+    }
+}

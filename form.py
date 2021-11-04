@@ -145,7 +145,7 @@ def execute_form():
 
             added_index = df.tail(1).index.start
 
-            df.to_json(json_file)
+            df.to_json(json_file, indent=4)
             sg.popup('Data saved!')
             window.close()
 
