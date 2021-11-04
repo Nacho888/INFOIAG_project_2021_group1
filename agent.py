@@ -141,7 +141,7 @@ class Agent:
         cost_travel_neighbourhood = 10
         cost_travel_city = 80
 
-        properties_restaurant_neighbourhood = self.get_entity_values(restaurant_neighbourhood[0])
+        properties_restaurant_neighbourhood = self.get_entity_values(restaurant_neighbourhood)
         properties_user_neighbourhood = self.get_entity_values(user_neighbourhood)
 
         city_restaurant = self.ent_to_label[properties_restaurant_neighbourhood["belongsToCity"][0]]
@@ -151,7 +151,7 @@ class Agent:
             adjacents = [self.ent_to_label[x] for x in properties_restaurant_neighbourhood["adjacentTo"]]
             if user_neighbourhood in adjacents:
                 duration += cost_travel_neighbourhood
-            elif user_neighbourhood == restaurant_neighbourhood[0]:
+            elif user_neighbourhood == self.ent_to_label[restaurant_neighbourhood]:
                 pass
             else:
                 while user_neighbourhood not in adjacents:
@@ -184,7 +184,7 @@ class Agent:
 
     def check_food_co2_discount(self, food, neighbourhood):
         properties_food = self.get_entity_values(food)
-        properties_neighbourhood = self.get_entity_values(neighbourhood[0])
+        properties_neighbourhood = self.get_entity_values(neighbourhood)
         city = properties_neighbourhood["belongsToCity"][0]
         try:
             result = abs(properties_food["co2Footprint"][0] - 100)
@@ -199,7 +199,7 @@ class Agent:
     def generate_output(self, options):
         result = {}
         for i, option in enumerate(options, start=1):
-            result[f"option{i}"] = {"transport": option["transport"], "restaurant": option["restaurant"],
+            result[f"option{i}"] = {"transport": option["transport"], "city": option["city"], "neighbourhood": option["neighbourhood"], "restaurant": option["restaurant"],
             "meal": option["meal"], "co2": option["co2"], "utility": option["utility"]}
         sorted_tuples = sorted(result.items(), key=lambda x: x[1]["utility"], reverse=True)
         sorted_result = {k: v for k, v in sorted_tuples}
@@ -249,7 +249,8 @@ class Agent:
 
         rideShares = []
         for location in locations:
-            if location == neighbourhood and "rideShare" in available_transports:
+            key = next(iter(location))
+            if self.ent_to_label[location[key]["neighbourhood"]] == neighbourhood and "rideShare" in available_transports:
                 rideShares.append(neighbourhood)
 
         return available_transports, rideShares
@@ -403,24 +404,40 @@ class Agent:
         for transport in available_transports:
             for restaurant in restaurants:
                 key = next(iter(restaurant))
-                restaurant_neighbourhood = restaurant[key]["neighbourhood"]
-                if transport == "rideShare" and len(ride_shares) > 0 and ride_shares[ride_share_counter] == restaurant_neighbourhood:
-                    transport = "rideShare"
-                for meal in restaurant[key]["meals"]:
-                    co2 = self.calculate_co2(transport, meal, restaurant_neighbourhood)
-                    utility = self.get_utility(transport, meal, restaurant_neighbourhood, df["select_neighbourhood"])
+                restaurant_neighbourhoods = restaurant[key]["neighbourhood"]
+                for neighbourhood in restaurant_neighbourhoods:
+                    if transport == "rideShare" and len(ride_shares) > 0 and ride_shares[ride_share_counter] == self.ent_to_label(neighbourhood):
+                        transport = "rideShare"
+                    for meal in restaurant[key]["meals"]:
+                        co2 = self.calculate_co2(transport, meal, neighbourhood)
+                        utility = self.get_utility(transport, meal, neighbourhood, df["select_neighbourhood"])
 
-                    option = {"transport": transport, "restaurant": key,
-                        "meal": self.ent_to_label[meal], "co2": co2, "utility": utility}
+                        option = {"transport": transport, "restaurant": key,
+                            "city": self.ent_to_label[self.get_entity_values(neighbourhood)["belongsToCity"][0]], "neighbourhood": self.ent_to_label[neighbourhood], "meal": self.ent_to_label[meal], "co2": co2, "utility": utility}
 
-                    options.append(option)
+                        options.append(option)
 
         self.generate_output(options)
         self.display_options()
 
 
     def display_options(self):
-        print("\n** AGENT OUTPUT **")
+        print("\n** AGENT OUTPUT **\n")
+
+        food = self.weights["MAIN_FOOD"]
+        transport = self.weights["MAIN_TRANSPORT"]
+        co2 = self.weights["TRANSPORT_CO2"]
+        cost = self.weights["TRANSPORT_COST"]
+        duration = self.weights["TRANSPORT_DURATION"]
+
+        print(f"Assigned preferences weights:")
+        print(f"\tFood: {round(food, 2)}")
+        print(f"\tTransport: {round(transport, 2)}")
+        print(f"\tTransport CO2: {round(co2, 2)}")
+        print(f"\tTransport cost: {round(cost, 2)}")
+        print(f"\tTransport duration: {round(duration, 2)}")
+
+        print("\nOptions found:")
 
         options = None
         try:
@@ -463,7 +480,7 @@ class Agent:
                     print("\nThere is no more options to display. Thanks for using the system!")
                     break
                 selected_option = options[option]
-                print(f"\nThe selected restaurant is {selected_option['restaurant']} where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences.")
+                print(f"\nThe selected restaurant is {selected_option['restaurant']} located in {selected_option['city']} ({selected_option['neighbourhood']}) where you can eat {selected_option['meal']}. You will get there by {selected_option['transport']}. This option has a total CO2 consumption of {selected_option['co2']} and an utility of {selected_option['utility']} calculated by the agent and respecting all of your preferences.")
                 while more not in ["y", "n", "c"]:
                     more = input("\nDo you want to see the next best option by utility (y/n) or do you want something cheaper (c)? (y/n/c): ")
                 if more == "y":
@@ -481,7 +498,7 @@ class Agent:
                             if options[entry]["restaurant"] == alternative:
                                 alt_option = options[entry]
                         if alt_option:
-                            print(f"\nThe cheaper alternative is {alt_option['restaurant']} where you can eat {alt_option['meal']}. You will get there by {alt_option['transport']}. This option has a total CO2 consumption of {alt_option['co2']} and an utility of {alt_option['utility']} calculated by the agent and respecting all of your preferences.")
+                            print(f"\nThe cheaper alternative is {alt_option['restaurant']} located in {selected_option['city']} ({selected_option['neighbourhood']}) where you can eat {alt_option['meal']}. You will get there by {alt_option['transport']}. This option has a total CO2 consumption of {alt_option['co2']} and an utility of {alt_option['utility']} calculated by the agent and respecting all of your preferences.")
                             more_alt = input("\nDo you want to try to find a cheaper option? (y/n): ")
                             if more_alt == "n": break
                     print("\nNo cheaper restaurants found. Returning to the option with the highest utility...")
