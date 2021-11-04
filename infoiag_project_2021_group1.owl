@@ -433,6 +433,27 @@
         <NamedIndividual IRI="#zuilen"/>
     </Declaration>
     <EquivalentClasses>
+        <Class IRI="#BigCity"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#City"/>
+            <ObjectMinCardinality cardinality="2">
+                <ObjectProperty IRI="#administrativeZoneOf"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Neighbourhood"/>
+                    <DataSomeValuesFrom>
+                        <DataProperty IRI="#nHabitants"/>
+                        <DatatypeRestriction>
+                            <Datatype abbreviatedIRI="xsd:integer"/>
+                            <FacetRestriction facet="http://www.w3.org/2001/XMLSchema#minExclusive">
+                                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10000</Literal>
+                            </FacetRestriction>
+                        </DatatypeRestriction>
+                    </DataSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
         <Class IRI="#Crowdedness"/>
         <ObjectOneOf>
             <NamedIndividual IRI="#highCrowdedness"/>
@@ -506,10 +527,6 @@
         </ObjectOneOf>
     </EquivalentClasses>
     <SubClassOf>
-        <Class IRI="#BigCity"/>
-        <Class IRI="#City"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#COVID"/>
         <Class IRI="#HealthCondition"/>
     </SubClassOf>
@@ -533,10 +550,6 @@
     <ClassAssertion>
         <Class IRI="#Food"/>
         <NamedIndividual IRI="#algeaRoll"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#BigCity"/>
-        <NamedIndividual IRI="#amsterdam"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#City"/>
@@ -905,10 +918,6 @@
     <ClassAssertion>
         <Class IRI="#Meal"/>
         <NamedIndividual IRI="#turkishMeatballs"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#BigCity"/>
-        <NamedIndividual IRI="#utrecht"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#City"/>
